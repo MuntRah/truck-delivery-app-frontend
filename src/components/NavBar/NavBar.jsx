@@ -25,10 +25,18 @@ const NavBar = ({ handleSignout }) => {
           <ul>
             <li>
               <Link to="/signin">Sign In</Link>
-            </li>
+            </li> 
             <li>
               <Link to="/signup">Sign Up</Link>
             </li>
+
+            <li> 
+              <Link to="/driver-signin">Driver Sign In</Link>
+            </li>
+            <li>
+              <Link to="/driver-signup">Driver Sign Up</Link>
+            </li>
+
           </ul>
         </nav>
       )}
