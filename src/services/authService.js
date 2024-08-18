@@ -1,15 +1,13 @@
-const BACKEND_URL = import.meta.env.VITE_EXPRESS_BACKEND_URL;
-
+const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 const getUser = () => {
   const token = localStorage.getItem('token');
   if (!token) return null;
   const user = JSON.parse(atob(token.split('.')[1]));
   return user;
 };
-
 const signup = async (formData) => {
   try {
-    const res = await fetch(`${BACKEND_URL}/users/signup`, {
+    const res = await fetch(`${VITE_BACKEND_URL}/users/signup`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
@@ -24,10 +22,9 @@ const signup = async (formData) => {
     throw new Error(err);
   }
 };
-
 const signin = async (user) => {
   try {
-    const res = await fetch(`${BACKEND_URL}/users/signin`, {
+    const res = await fetch(`${VITE_BACKEND_URL}/users/signin`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(user),
@@ -46,9 +43,7 @@ const signin = async (user) => {
     throw err;
   }
 };
-
 const signout = () => {
   localStorage.removeItem('token');
 };
-
 export { signup, signin, getUser, signout };
