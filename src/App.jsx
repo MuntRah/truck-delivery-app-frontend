@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+import { useState, createContext ,useEffect} from "react";
 import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
 import Landing from "./components/Landing/Landing";
@@ -9,17 +9,15 @@ import DriverSignupForm from "./components/SignupForm/DriverSignupForm";
 import SigninForm from "./components/SigninForm/SigninForm";
 import DriverSigninForm from "./components/SigninForm/DriverSigninForm";
 
-import * as authService from '../src/services/authService'; // import the authservice
-import orderService from './services/orderService';
+import * as authService from "../src/services/authService"; // import the authservice
+import orderService from "./services/orderService";
 
-import OrderList from './components/OrderList/OrderList';
-import OrderDetails from './components/OrderDetails/OrderDetails';
-import OrderForm from './components/OrderForm/OrderForm';
-
+import OrderList from "./components/OrderList/OrderList";
+import OrderDetails from "./components/OrderDetails/OrderDetails";
+import OrderForm from "./components/OrderForm/OrderForm";
 
 
 export const AuthedUserContext = createContext(null);
-
 
 const App = () => {
   const [user, setUser] = useState(authService.getUser()); // using from authservice
@@ -30,12 +28,20 @@ const App = () => {
     setUser(null);
   };
 
+  useEffect(() => {
+    const fetchAllOrders = async () => {
+      const orderData = await orderService.index();
+      console.log('orderData:', orderData);
+      setOrders(orderData);
+    };
+    if (user) fetchAllOrders();
+  }, [user]);
+
   const handleAddOrder = async (orderFormData) => {
     const newOrder = await orderService.create(orderFormData);
-    setOrders([...orders, newOrder])
+    setOrders([...orders, newOrder]);
     // navigate('/order/orders');
-  }
-
+  };
 
   return (
     <>
@@ -45,8 +51,8 @@ const App = () => {
           {user ? (
             <>
               <Route path="/" element={<Dashboard user={user} />} />
-              <Route path="/orders" element={<OrderList />} />
-              <Route path="/orders/:orderId" element={<OrderDetails/>} />
+              <Route path="/orders" element={<OrderList orders={orders} />} />
+              <Route path="/orders/:orderId" element={<OrderDetails />} />
 
               <Route
                 path="/orders/new"
