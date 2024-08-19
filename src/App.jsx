@@ -48,7 +48,15 @@ const App = () => {
   const handleAddOrder = async (orderFormData) => {
     const newOrder = await orderService.create(orderFormData);
     setOrders([...orders, newOrder]);
-    navigate("/order/orders");
+    navigate("/orders");
+  };
+
+  const handleDeleteOrder = async (orderId) => {
+    await orderService.deleteOrder(orderId);
+    const updatedOrders = await orderService.index();
+    setOrders(updatedOrders);
+    navigate("/orders");
+
   };
 
   return (
@@ -59,7 +67,15 @@ const App = () => {
           {user ? (
             <>
               <Route path="/" element={<Dashboard user={user} />} />
-              <Route path="/orders" element={<OrderList orders={orders} />} />
+              <Route
+                path="/orders"
+                element={
+                  <OrderList
+                    orders={orders}
+                    handleDeleteOrder={handleDeleteOrder}
+                  />
+                }
+              />
               <Route path="/orders/:orderId" element={<OrderDetails />} />
 
               <Route

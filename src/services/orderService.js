@@ -38,4 +38,18 @@ const create = async (orderFormData) => {
   }
 };
 
-export default { index, show, create };
+const deleteOrder = async (orderId) => {
+  try {
+    const res = await fetch(`${BASE_URL}/order/orders/${orderId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export default { index, show, create, deleteOrder };
