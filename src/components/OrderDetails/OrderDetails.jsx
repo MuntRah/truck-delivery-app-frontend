@@ -6,7 +6,7 @@ import orderService from "../../services/orderService";
 // import descriptionService from "../../services/descriptionService";
 
 // Components
-import CustomerDate from "../common/CustomerDate";
+// import CustomerDate from "../common/CustomerDate";
 // import DescriptionForm from '../DescriptionForm/DescriptionForm';
 
 
@@ -22,15 +22,6 @@ const OrderDetails = (props) => {
     getOrder()
   },[orderId])
 
-  const handleAddDescription = async (formData) => {
-    const newComment = await commentService.create(orderId, formData)
-
-    const copyOrder = {...order}
-    copyOrder.comments.push(newComment)
-
-    setOrder(copyOrder)
-  }
-
   if(!order){
     return <main><h3>Loading...</h3></main>
   }
@@ -38,27 +29,16 @@ const OrderDetails = (props) => {
   return (
     <main>
       <header>
-        <p>{order.vehicle.toUpperCase()}</p>
-        <h1>{order.pickup}</h1>
+      <h2>From :{order.from}</h2>
+              <h2>To: {order.to}</h2>
+              <p>Vehicle type : {order.vehicle}</p>
+              <p>Status : {order.orderStatus}</p>
+              <p>Price :{order.price}</p>
         {/* <CustomerDate name={order.customer.username} date={order.createdAt}/> */}
       </header>
       <p>{order.text}</p>
       <section>
-        <h2>Description</h2>
-        <DescriptionForm handleAddDescription={handleAddDescription}/>
-        {!order.descriptions.length && <p>There are is no description.</p>}
 
-        {order.descriptions.map((description) => (
-          <article key={description._id}>
-            <header>
-              <p>
-                {description.customer.username} posted on
-                {new Date(description.createdAt).toLocaleDateString()}
-              </p>
-            </header>
-            <p>{comment.text}</p>
-          </article>
-        ))}
       </section>
     </main>
   );
