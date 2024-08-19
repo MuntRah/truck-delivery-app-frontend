@@ -20,29 +20,29 @@ const OrderForm = ({ handleAddOrder }) => {
   return (
     <main>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="pickup-input">Pick-up</label>
+        <label htmlFor="from">Pick-up</label>
         <input
           required
           type="text"
-          name="pickup"
-          id="pickup-input"
+          name="from"
+          id="from"
           value={formData.title}
           onChange={handleChange}
         />
-        <label htmlFor="dropoff-input">Dropoff</label>
+        <label htmlFor="to">Dropoff</label>
         <input
           required
           type="text"
-          name="dropoff"
-          id="dropoff-input"
+          name="to"
+          id="to"
           value={formData.text}
           onChange={handleChange}
         />
-        <label htmlFor="vehicle-input">Vehicle type</label>
+        <label htmlFor="vehicle">Vehicle type</label>
         <select
           required
           name="vehicle"
-          id="vehicle-input"
+          id="vehicle"
           value={formData.category}
           onChange={handleChange}
         >
