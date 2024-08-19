@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const OrderList = ({ orders, handleDelteOrder }) => {
+const OrderList = ({ orders, handleDeleteOrder }) => {
   if (!orders || orders.length === 0) {
     return <main>There are no orders.</main>;
   }
