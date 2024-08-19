@@ -1,20 +1,21 @@
-import { useState, createContext } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import NavBar from './components/NavBar/NavBar';
-import Landing from './components/Landing/Landing';
-import Dashboard from './components/Dashboard/Dashboard';
-import SignupForm from './components/SignupForm/SignupForm';
-import DriverSignupForm from './components/SignupForm/DriverSignupForm';
+import { useState, createContext, useEffect } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import NavBar from "./components/NavBar/NavBar";
 
-import SigninForm from './components/SigninForm/SigninForm';
-import DriverSigninForm from './components/SigninForm/DriverSigninForm';
+import Landing from "./components/Landing/Landing";
+import Dashboard from "./components/Dashboard/Dashboard";
+import SignupForm from "./components/SignupForm/SignupForm";
+import DriverSignupForm from "./components/SignupForm/DriverSignupForm";
 
-import * as authService from '../src/services/authService'; // import the authservice
-import orderService from './services/orderService';
+import SigninForm from "./components/SigninForm/SigninForm";
+import DriverSigninForm from "./components/SigninForm/DriverSigninForm";
 
-import OrderList from './components/OrderList/OrderList';
-import OrderDetails from './components/OrderDetails/OrderDetails';
-import OrderForm from './components/OrderForm/OrderForm';
+import * as authService from "../src/services/authService"; // import the authservice
+import orderService from "./services/orderService";
+
+import OrderList from "./components/OrderList/OrderList";
+import OrderDetails from "./components/OrderDetails/OrderDetails";
+import OrderForm from "./components/OrderForm/OrderForm";
 
 export const AuthedUserContext = createContext(null);
 
@@ -27,12 +28,28 @@ const App = () => {
     setUser(null);
   };
 
+  useEffect(() => {
+    const fetchAllOrders = async () => {
+      const orderData = await orderService.index();
+      console.log("orderData:", orderData);
+      setOrders(orderData);
+    };
+    if (user) fetchAllOrders();
+  }, [user]);
+
+  // editing in app.jsx
+
+  // const handleAddOrder = async (orderFormData) => {
+  //   const newOrder = await orderService.create(orderFormData);
+  //   setOrders([...orders, newOrder]);
+  //   // navigate('/order/orders');
+  // };
+  const navigate = useNavigate();
   const handleAddOrder = async (orderFormData) => {
     const newOrder = await orderService.create(orderFormData);
-    setOrders([...orders, newOrder])
-    // navigate('/order/orders');
-  }
-
+    setOrders([...orders, newOrder]);
+    navigate("/order/orders");
+  };
 
   return (
     <>
@@ -41,15 +58,14 @@ const App = () => {
         <Routes>
           {user ? (
             <>
-            <Route path="/" element={<Dashboard user={user} />} />
-            <Route path="/orders" element={<OrderList />} />
-            <Route path="/orders/:orderId" element={<OrderDetails/>} />
+              <Route path="/" element={<Dashboard user={user} />} />
+              <Route path="/orders" element={<OrderList orders={orders} />} />
+              <Route path="/orders/:orderId" element={<OrderDetails />} />
 
-            <Route
-              path="/orders/new"
-              element={<OrderForm handleAddOrder={handleAddOrder} />}
-            />
-
+              <Route
+                path="/orders/new"
+                element={<OrderForm handleAddOrder={handleAddOrder} />}
+              />
             </>
           ) : (
             <Route path="/" element={<Landing />} />
@@ -57,9 +73,14 @@ const App = () => {
           <Route path="/signup" element={<SignupForm setUser={setUser} />} />
           <Route path="/signin" element={<SigninForm setUser={setUser} />} />
 
-          <Route path="/driver-signup" element={<DriverSignupForm setUser={setUser} />} />
-          <Route path="/driver-signin" element={<DriverSigninForm setUser={setUser} />} />
-
+          <Route
+            path="/driver-signup"
+            element={<DriverSignupForm setUser={setUser} />}
+          />
+          <Route
+            path="/driver-signin"
+            element={<DriverSigninForm setUser={setUser} />}
+          />
         </Routes>
       </AuthedUserContext.Provider>
     </>
