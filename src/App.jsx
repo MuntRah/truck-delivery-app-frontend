@@ -51,11 +51,12 @@ const App = () => {
     navigate("/orders");
   };
 
-  const handleDelteOrder = async (orderId) => {
+  const handleDeleteOrder = async (orderId) => {
     await orderService.deleteOrder(orderId);
     const updatedOrders = await orderService.index();
     setOrders(updatedOrders);
     navigate("/orders");
+
   };
 
   return (
@@ -71,7 +72,7 @@ const App = () => {
                 element={
                   <OrderList
                     orders={orders}
-                    handleDelteOrder={handleDelteOrder}
+                    handleDeleteOrder={handleDeleteOrder}
                   />
                 }
               />

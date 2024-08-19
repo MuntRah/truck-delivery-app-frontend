@@ -16,7 +16,7 @@ const OrderList = ({ orders, handleDelteOrder }) => {
               </h2>
               <button
                 onClick={() => {
-                  handleDelteOrder(order._id);
+                  handleDeleteOrder(order._id);
                 }}
               >
                 Delete
