@@ -52,11 +52,10 @@ const App = () => {
   };
 
   const handleDelteOrder = async (orderId) => {
-    const deleteOrder = await orderService.deleteOrder(orderId);
-    // Filter state using deletedHoot._id:
-    setOrders(orders.filter((order) => order._id !== deleteOrder._id));
-    // Redirect the user:
-    navigate("/order");
+    await orderService.deleteOrder(orderId);
+    const updatedOrders = await orderService.index();
+    setOrders(updatedOrders);
+    navigate("/orders");
   };
 
   return (
