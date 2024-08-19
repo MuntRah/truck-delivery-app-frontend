@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import { useState, createContext ,useEffect} from "react";
 import { Routes, Route } from "react-router-dom";
+=======
+import { useState, createContext } from "react";
+import { Routes, Route ,  useNavigate } from "react-router-dom";
+>>>>>>> 19afb407266592e0f2623b400161a53ac3faaea0
 import NavBar from "./components/NavBar/NavBar";
 import Landing from "./components/Landing/Landing";
 import Dashboard from "./components/Dashboard/Dashboard";
@@ -12,9 +17,13 @@ import DriverSigninForm from "./components/SigninForm/DriverSigninForm";
 import * as authService from "../src/services/authService"; // import the authservice
 import orderService from "./services/orderService";
 
+<<<<<<< HEAD
 import OrderList from "./components/OrderList/OrderList";
 import OrderDetails from "./components/OrderDetails/OrderDetails";
 import OrderForm from "./components/OrderForm/OrderForm";
+=======
+export const AuthedUserContext = createContext(null);
+>>>>>>> 19afb407266592e0f2623b400161a53ac3faaea0
 
 
 export const AuthedUserContext = createContext(null);
@@ -27,6 +36,7 @@ const App = () => {
     authService.signout();
     setUser(null);
   };
+<<<<<<< HEAD
 
   useEffect(() => {
     const fetchAllOrders = async () => {
@@ -42,6 +52,15 @@ const App = () => {
     setOrders([...orders, newOrder]);
     // navigate('/order/orders');
   };
+=======
+  const navigate = useNavigate();
+  const handleAddOrder = async (orderFormData) => {
+    const newOrder = await orderService.create(orderFormData);
+    setOrders([...orders, newOrder])
+    navigate('/order/orders');
+  }
+
+>>>>>>> 19afb407266592e0f2623b400161a53ac3faaea0
 
   return (
     <>
