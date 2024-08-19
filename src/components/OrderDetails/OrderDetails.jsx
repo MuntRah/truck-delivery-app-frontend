@@ -41,6 +41,7 @@ const OrderDetails = (props) => {
         <button id="delete" type="delete">DELETE</button>
 
 
+
         {/* <CustomerDate name={order.customer.username} date={order.createdAt}/> */}
       </header>
       <p>{order.text}</p>

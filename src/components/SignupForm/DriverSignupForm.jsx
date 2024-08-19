@@ -25,7 +25,7 @@ const DriverSignupForm = (props) => {
     try {
       const newUserResponse = await authService.signup(formData);
       props.setUser(newUserResponse.user);
-      navigate('/');
+      navigate('/DriverDashboard');
     } catch (err) {
       updateMessage(err.message);
     }
@@ -85,7 +85,7 @@ const DriverSignupForm = (props) => {
         </div>
         <div>
           <button disabled={isFormInvalid()}>Sign Up</button>
-          <Link to="/">
+          <Link to="/DriverDashboard">
             <button>Cancel</button>
           </Link>
         </div>

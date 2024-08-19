@@ -56,7 +56,7 @@ const App = () => {
       <AuthedUserContext.Provider value={user}>
         <NavBar user={user} handleSignout={handleSignout} />
         <Routes>
-          {user ? (
+          {user?(
             <>
               <Route path="/" element={<Dashboard user={user} />} />
               <Route path="/orders" element={<OrderList orders={orders} />} />
@@ -67,9 +67,9 @@ const App = () => {
                 element={<OrderForm handleAddOrder={handleAddOrder} />}
               />
             </>
-          ) : (
+           ) : (
             <Route path="/" element={<Landing />} />
-          )}
+           )}
           <Route path="/signup" element={<SignupForm setUser={setUser} />} />
           <Route path="/signin" element={<SigninForm setUser={setUser} />} />
 
@@ -85,6 +85,7 @@ const App = () => {
       </AuthedUserContext.Provider>
     </>
   );
+  
 };
 
 export default App;

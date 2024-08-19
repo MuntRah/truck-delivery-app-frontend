@@ -26,7 +26,7 @@ const OrderForm = ({ handleAddOrder }) => {
           type="text"
           name="from"
           id="from"
-          value={formData.title}
+          value={formData.from}
           onChange={handleChange}
         />
         <label htmlFor="to">Dropoff</label>
@@ -35,7 +35,7 @@ const OrderForm = ({ handleAddOrder }) => {
           type="text"
           name="to"
           id="to"
-          value={formData.text}
+          value={formData.to}
           onChange={handleChange}
         />
         <label htmlFor="vehicle">Vehicle type</label>
@@ -43,7 +43,7 @@ const OrderForm = ({ handleAddOrder }) => {
           required
           name="vehicle"
           id="vehicle"
-          value={formData.category}
+          value={formData.vehicle}
           onChange={handleChange}
         >
           <option value="Sedan">Sedan</option>
