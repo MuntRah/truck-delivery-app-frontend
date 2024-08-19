@@ -19,7 +19,7 @@ import OrderForm from './components/OrderForm/OrderForm';
 export const AuthedUserContext = createContext(null);
 
 const App = () => {
-  const [user, setUser] = useState(authService.getUser()); // using the method from authservice
+  const [user, setUser] = useState(authService.getUser()); // using from authservice
   const [orders, setOrders] = useState([]);
 
   const handleSignout = () => {
@@ -30,7 +30,7 @@ const App = () => {
   const handleAddOrder = async (orderFormData) => {
     const newOrder = await orderService.create(orderFormData);
     setOrders([...orders, newOrder])
-    navigate('/orders');
+    // navigate('/order/orders');
   }
 
 
