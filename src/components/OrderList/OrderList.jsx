@@ -7,19 +7,19 @@ const OrderList = ({ orders }) => {
 
   return (
     <main>
-      {orders.map((order) => <Link key={order._id} to={`/orders/${order._id}`}>
-        <section>
-          <ul>
-            <li>
-              <h2>From :{order.from}</h2>
-              <h2>To: {order.to}</h2>
-              <p>Vehicle type : {order.vehicle}</p>
-              <p>Status : {order.orderStatus}</p>
-            </li>
-          </ul>
-        </section>
-        </Link>)
-      }
+      {orders.map((order) => (
+        <Link key={order._id} to={`/orders/${order._id}`}>
+          <section>
+            <ul>
+              <li>
+                <h2>
+                  From :({order.from}) - To : ({order.to})
+                </h2>
+              </li>
+            </ul>
+          </section>
+        </Link>
+      ))}
     </main>
   );
 };
