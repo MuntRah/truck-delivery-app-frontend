@@ -1,3 +1,4 @@
+
 const OrderList = ({ orders }) => {
   if (!orders || orders.length === 0) {
     return <main>There are no orders.</main>;
@@ -11,7 +12,8 @@ const OrderList = ({ orders }) => {
             <h2>{order.from}</h2>
             <h2>{order.to}</h2>
             <h2>{order.price}</h2>
-            <h2>{order.status}</h2>
+            <h2>{order.orderStatus}</h2>
+            <h2>{order.vehicle}</h2>
           </div>
         </Link>
       ))}
