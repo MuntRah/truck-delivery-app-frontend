@@ -38,7 +38,7 @@ const OrderDetails = (props) => {
         <p>Status : {order.orderStatus}</p>
         <p>Price :{order.price}</p>
         <button id="update" type="update">UPDATE</button>
-        <button id="delete" type="delete">DELETE</button>
+      
 
 
         {/* <CustomerDate name={order.customer.username} date={order.createdAt}/> */}
