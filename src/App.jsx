@@ -1,6 +1,7 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
+
 import Landing from "./components/Landing/Landing";
 import Dashboard from "./components/Dashboard/Dashboard";
 import SignupForm from "./components/SignupForm/SignupForm";
