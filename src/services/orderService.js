@@ -3,7 +3,7 @@ const BASE_URL = `${import.meta.env.VITE_BACKEND_URL}/order`;
 const index = async () => {
   try {
     const res = await fetch(`${BASE_URL}/orders`, {
-      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     });
     return res.json();
   } catch (error) {
@@ -14,7 +14,7 @@ const index = async () => {
 const show = async (orderId) => {
   try {
     const res = await fetch(`${BASE_URL}/orders/${orderId}`, {
-      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     });
     return res.json();
   } catch (error) {
@@ -39,10 +39,10 @@ const show = async (orderId) => {
 const create = async (orderFormData) => {
   try {
     const res = await fetch(`${BASE_URL}/orders`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(orderFormData),
     });
@@ -51,5 +51,17 @@ const create = async (orderFormData) => {
     console.log(error);
   }
 };
-
-export default { index, show, create };
+const deleteOrder = async (orderId) => {
+  try {
+    const res = await fetch(`${BASE_URL}/orders/${orderId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+export default { index, show, create , deleteOrder };
