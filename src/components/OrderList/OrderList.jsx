@@ -12,8 +12,11 @@ const OrderList = ({ orders }) => {
         <section>
           <ul>
             <li>
-              <h2>From :{order.from}</h2>
-              <h2>To: {order.to}</h2>
+
+              <h3>From :{order.from}</h3>
+              <h3>To: {order.to}</h3>
+              <p>Price :{order.price}</p>
+              <p>Status : {order.orderStatus}</p>
               <p>Vehicle type : {order.vehicle}</p>
               <p>Status : {order.orderStatus}</p>
             </li>
