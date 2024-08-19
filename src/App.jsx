@@ -1,5 +1,5 @@
 import { useState, createContext } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route ,  useNavigate } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
 import Landing from "./components/Landing/Landing";
 import Dashboard from "./components/Dashboard/Dashboard";
@@ -17,7 +17,6 @@ import OrderDetails from './components/OrderDetails/OrderDetails';
 import OrderForm from './components/OrderForm/OrderForm';
 
 
-import OrderList from "./components/OrderList/OrderList";
 export const AuthedUserContext = createContext(null);
 
 
@@ -29,11 +28,11 @@ const App = () => {
     authService.signout();
     setUser(null);
   };
-
+  const navigate = useNavigate();
   const handleAddOrder = async (orderFormData) => {
     const newOrder = await orderService.create(orderFormData);
     setOrders([...orders, newOrder])
-    // navigate('/order/orders');
+    navigate('/order/orders');
   }
 
 
