@@ -48,7 +48,15 @@ const App = () => {
   const handleAddOrder = async (orderFormData) => {
     const newOrder = await orderService.create(orderFormData);
     setOrders([...orders, newOrder]);
-    navigate("/order/orders");
+    navigate("/orders");
+  };
+
+  const handleDelteOrder = async (orderId) => {
+    const deleteOrder = await orderService.deleteOrder(orderId);
+    // Filter state using deletedHoot._id:
+    setOrders(orders.filter((order) => order._id !== deleteOrder._id));
+    // Redirect the user:
+    navigate("/order");
   };
 
   return (
@@ -59,7 +67,15 @@ const App = () => {
           {user?(
             <>
               <Route path="/" element={<Dashboard user={user} />} />
-              <Route path="/orders" element={<OrderList orders={orders} />} />
+              <Route
+                path="/orders"
+                element={
+                  <OrderList
+                    orders={orders}
+                    handleDelteOrder={handleDelteOrder}
+                  />
+                }
+              />
               <Route path="/orders/:orderId" element={<OrderDetails />} />
 
               <Route

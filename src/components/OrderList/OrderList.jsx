@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const OrderList = ({ orders }) => {
+const OrderList = ({ orders, handleDelteOrder }) => {
   if (!orders || orders.length === 0) {
     return <main>There are no orders.</main>;
   }
@@ -8,17 +8,27 @@ const OrderList = ({ orders }) => {
   return (
     <main>
       {orders.map((order) => (
-        <Link key={order._id} to={`/orders/${order._id}`}>
-          <section>
-            <ul>
-              <li>
-                <h2>
-                  From :({order.from}) - To : ({order.to})
-                </h2>
-              </li>
-            </ul>
-          </section>
-        </Link>
+        <section key={order._id}>
+          <ul>
+            <li>
+              <h2>
+                From: ({order.from}) - To: ({order.to})
+              </h2>
+              <button
+                onClick={() => {
+                  handleDelteOrder(order._id);
+                }}
+              >
+                Delete
+              </button>
+              <Link to={`/orders/${order._id}`}>
+                <button>
+                  View Details
+                </button>
+              </Link>
+            </li>
+          </ul>
+        </section>
       ))}
     </main>
   );
