@@ -1,17 +1,19 @@
-import { useState, createContext } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import NavBar from './components/NavBar/NavBar';
-import Landing from './components/Landing/Landing';
-import Dashboard from './components/Dashboard/Dashboard';
-import SignupForm from './components/SignupForm/SignupForm';
-import DriverSignupForm from './components/SignupForm/DriverSignupForm';
+import { useState, createContext } from "react";
+import { Routes, Route } from "react-router-dom";
+import NavBar from "./components/NavBar/NavBar";
+import Landing from "./components/Landing/Landing";
+import Dashboard from "./components/Dashboard/Dashboard";
+import SignupForm from "./components/SignupForm/SignupForm";
+import DriverSignupForm from "./components/SignupForm/DriverSignupForm";
 
-import SigninForm from './components/SigninForm/SigninForm';
-import DriverSigninForm from './components/SigninForm/DriverSigninForm';
+import SigninForm from "./components/SigninForm/SigninForm";
+import DriverSigninForm from "./components/SigninForm/DriverSigninForm";
 
-import * as authService from '../src/services/authService'; // import the authservice
+import * as authService from "../src/services/authService"; // import the authservice
 
+import OrderList from "./components/OrderList/OrderList";
 export const AuthedUserContext = createContext(null);
+
 
 const App = () => {
   const [user, setUser] = useState(authService.getUser()); // using the method from authservice
@@ -27,16 +29,25 @@ const App = () => {
         <NavBar user={user} handleSignout={handleSignout} />
         <Routes>
           {user ? (
-            <Route path="/" element={<Dashboard user={user} />} />
+            <>
+              <Route path="/" element={<Dashboard user={user} />} />
+        
+              <Route path="/orderslist" element={<OrderList />} />
+            </>
           ) : (
             <Route path="/" element={<Landing />} />
           )}
           <Route path="/signup" element={<SignupForm setUser={setUser} />} />
           <Route path="/signin" element={<SigninForm setUser={setUser} />} />
 
-          <Route path="/driver-signup" element={<DriverSignupForm setUser={setUser} />} />
-          <Route path="/driver-signin" element={<DriverSigninForm setUser={setUser} />} />
-
+          <Route
+            path="/driver-signup"
+            element={<DriverSignupForm setUser={setUser} />}
+          />
+          <Route
+            path="/driver-signin"
+            element={<DriverSigninForm setUser={setUser} />}
+          />
         </Routes>
       </AuthedUserContext.Provider>
     </>
