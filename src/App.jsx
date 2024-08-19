@@ -36,6 +36,8 @@ const App = () => {
     if (user) fetchAllOrders();
   }, [user]);
 
+  // editing in app.jsx
+
   // const handleAddOrder = async (orderFormData) => {
   //   const newOrder = await orderService.create(orderFormData);
   //   setOrders([...orders, newOrder]);
