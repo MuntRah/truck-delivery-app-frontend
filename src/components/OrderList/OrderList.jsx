@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const OrderList = ({ orders, handleDelteOrder }) => {
+const OrderList = ({ orders, handleDeleteOrder }) => {
   if (!orders || orders.length === 0) {
     return <main>There are no orders.</main>;
   }
@@ -16,7 +16,7 @@ const OrderList = ({ orders, handleDelteOrder }) => {
               </h2>
               <button
                 onClick={() => {
-                  handleDelteOrder(order._id);
+                  handleDeleteOrder(order._id);
                 }}
               >
                 Delete
