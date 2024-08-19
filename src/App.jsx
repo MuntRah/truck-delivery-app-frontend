@@ -10,16 +10,29 @@ import SigninForm from './components/SigninForm/SigninForm';
 import DriverSigninForm from './components/SigninForm/DriverSigninForm';
 
 import * as authService from '../src/services/authService'; // import the authservice
+import orderService from './services/orderService';
+
+import OrderList from './components/OrderList/OrderList';
+import OrderDetails from './components/OrderDetails/OrderDetails';
+import OrderForm from './components/OrderForm/OrderForm';
 
 export const AuthedUserContext = createContext(null);
 
 const App = () => {
   const [user, setUser] = useState(authService.getUser()); // using the method from authservice
+  const [orders, setOrders] = useState([]);
 
   const handleSignout = () => {
     authService.signout();
     setUser(null);
   };
+
+  const handleAddOrder = async (orderFormData) => {
+    const newOrder = await orderService.create(orderFormData);
+    setOrders([...orders, newOrder])
+    navigate('/orders');
+  }
+
 
   return (
     <>
@@ -27,7 +40,17 @@ const App = () => {
         <NavBar user={user} handleSignout={handleSignout} />
         <Routes>
           {user ? (
+            <>
             <Route path="/" element={<Dashboard user={user} />} />
+            <Route path="/orders" element={<OrderList />} />
+            <Route path="/orders/:orderId" element={<OrderDetails/>} />
+
+            <Route
+              path="/orders/new"
+              element={<OrderForm handleAddOrder={handleAddOrder} />}
+            />
+
+            </>
           ) : (
             <Route path="/" element={<Landing />} />
           )}
