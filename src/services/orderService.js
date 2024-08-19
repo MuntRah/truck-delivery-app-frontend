@@ -54,14 +54,14 @@ const create = async (orderFormData) => {
 const deleteOrder = async (orderId) => {
   try {
     const res = await fetch(`${BASE_URL}/orders/${orderId}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
     });
     return res.json();
   } catch (error) {
     console.log(error);
   }
 };
-export default { index, show, create , deleteOrder };
+export default { index, show, create, deleteOrder };
