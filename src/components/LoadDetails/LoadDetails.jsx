@@ -5,18 +5,18 @@ import { useEffect, useState } from "react";
 import loadService from "../../services/loadService";
 
 const LoadDetails = (props) => {
-  const { orderId } = useParams();
-  const [order, setOrder] = useState(null);
+  const { loadId } = useParams();
+  const [load, setLoad] = useState(null);
 
   useEffect(() => {
-    async function getOrder() {
-      const orderData = await orderService.show(orderId);
-      setOrder(orderData);
+    async function getLoad() {
+      const loadData = await loadService.show(loadId);
+      setLoad(loadData);
     }
-    getOrder();
-  }, [orderId]);
+    getLoad();
+  }, [loadId]);
 
-  if (!order) {
+  if (!load) {
     return (
       <main>
         <h3>Loading...</h3>
