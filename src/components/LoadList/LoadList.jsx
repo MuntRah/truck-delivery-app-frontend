@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
-const ListLoad = ({ loads }) => {
-  if (!loads.length) return <main> there is no loads</main>;
+const LoadList = ({ loads }) => {
+  if (!loads.length) return <main> There are no loads</main>;
 
   return (
     <main>
@@ -20,4 +20,4 @@ const ListLoad = ({ loads }) => {
   );
 };
 
-export default ListLoad;
+export default LoadList;

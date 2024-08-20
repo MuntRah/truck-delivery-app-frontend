@@ -16,6 +16,7 @@ import orderService from "./services/orderService";
 import OrderList from "./components/OrderList/OrderList";
 import OrderDetails from "./components/OrderDetails/OrderDetails";
 import OrderForm from "./components/OrderForm/OrderForm";
+import UpdateOrderForm from "./components/UpdateOrderForm/UpdateOrderForm";
 
 export const AuthedUserContext = createContext(null);
 
@@ -39,11 +40,12 @@ const App = () => {
 
   // editing in app.jsx
 
-  // const handleAddOrder = async (orderFormData) => {
-  //   const newOrder = await orderService.create(orderFormData);
+  // const UpdateOrderForm = async (orderFormData) => {
+  //   const updateOrder = await orderService.updateOrder(orderFormData);
   //   setOrders([...orders, newOrder]);
-  //   // navigate('/order/orders');
+  //   navigate('/order/orders');
   // };
+
   const navigate = useNavigate();
   const handleAddOrder = async (orderFormData) => {
     const newOrder = await orderService.create(orderFormData);
@@ -55,8 +57,19 @@ const App = () => {
     await orderService.deleteOrder(orderId);
     const updatedOrders = await orderService.index();
     setOrders(updatedOrders);
-    navigate("/orders");
+    navigate("order/orders");
 
+  };
+  
+  const handleUpdateOrder = async (orderFormData) => {
+    const updatedOrder = await orderService.updateOrder(orderFormData);
+    
+    const updatedOrders = orders.map(order =>
+      order.id === updatedOrder.id ? updatedOrder : order
+    );
+    setOrders(updatedOrders);
+    
+    navigate("/orders");
   };
 
   return (
@@ -82,9 +95,21 @@ const App = () => {
                 path="/orders/new"
                 element={<OrderForm handleAddOrder={handleAddOrder} />}
               />
+              
+            <Route
+              path="/orders/update/:orderId"
+              element={
+                <UpdateOrderForm 
+                  orders={orders}
+                  setOrders={setOrders}
+                  handleUpdateOrder={handleUpdateOrder}
+                />
+              }
+            />
+
             </>
           ) : (
-            <Route path="/" element={<Landing />} />
+            <Route path="/" element={<Landing />} />  
           )}
           <Route path="/signup" element={<SignupForm setUser={setUser} />} />
           <Route path="/signin" element={<SigninForm setUser={setUser} />} />

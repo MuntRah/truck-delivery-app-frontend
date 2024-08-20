@@ -40,7 +40,7 @@ const create = async (orderFormData) => {
 
 const deleteOrder = async (orderId) => {
   try {
-    const res = await fetch(`${BASE_URL}/order/orders/${orderId}`, {
+    const res = await fetch(`${BASE_URL}/${orderId}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -52,4 +52,21 @@ const deleteOrder = async (orderId) => {
   }
 };
 
-export default { index, show, create, deleteOrder };
+const updateOrder = async (UpdateOrderFormData) => {
+  try {
+    const res = await fetch(`${BASE_URL}`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(UpdateOrderFormData),
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+export default { index, show, create, deleteOrder, updateOrder };
