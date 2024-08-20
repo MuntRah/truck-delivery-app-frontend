@@ -25,7 +25,7 @@ const DriverSigninForm = (props) => {
       const user = await authService.signin(formData);
       console.log(user);
       props.setUser(user);
-      navigate('/');
+      navigate('/DriverDashboard');
     } catch (err) {
       updateMessage(err.message);
     }

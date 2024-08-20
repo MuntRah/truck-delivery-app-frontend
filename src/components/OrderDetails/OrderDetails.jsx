@@ -52,3 +52,4 @@ const OrderDetails = (props) => {
 };
 
 export default OrderDetails;
+

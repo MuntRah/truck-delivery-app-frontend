@@ -19,6 +19,21 @@ const show = async (orderId) => {
     console.log(error);
   }
 };
+
+// Need to fix
+// const create = async (orderFormData) => {
+//   const options = {
+//     method: 'POST',
+//     headers: {
+//               Authorization: `Bearer ${localStorage.getItem('token')}`,
+//               'Content-Type': 'application/json',
+//             },
+//     body: JSON.stringify(orderFormData)
+//   }
+//   const res = await fetch(`${BASE_URL}/orders`)
+//   return res.json()
+// }
+
 const create = async (orderFormData) => {
   try {
     const res = await fetch(`${BASE_URL}`, {
