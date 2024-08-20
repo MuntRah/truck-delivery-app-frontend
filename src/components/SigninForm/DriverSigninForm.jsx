@@ -60,7 +60,7 @@ const DriverSigninForm = (props) => {
         </div>
         <div>
           <button>Log In</button>
-          <Link to="/">
+          <Link to="/DriverDashboard">
             <button>Cancel</button>
           </Link>
         </div>

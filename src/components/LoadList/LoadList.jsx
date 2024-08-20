@@ -1,20 +1,27 @@
 import { Link } from "react-router-dom";
 
-const LoadList = ({ loads }) => {
-  if (!loads.length) return <main> There are no loads</main>;
+const LoadList = ({ loads, }) => {
+  if (!loads || loads.length === 0) {
+    return <main>There are no orders.</main>;
+  }
 
   return (
     <main>
       {loads.map((load) => (
-        <Link key={load._id} to={`/orders /${load._id}`}>
-          <div>
-            <h2>{load.from}</h2>
-            <h2>{load.to}</h2>
-            <h2>{load.price}</h2>
-            <h2>{load.status}</h2>
-            <h2>{load.action}</h2>
-          </div>
-        </Link>
+        <section key={load._id}>
+          <ul>
+            <li>
+              <h2>
+                From: ({load.from}) - To: ({load.to})
+              </h2>
+              <Link to={`/loads/${load._id}`}>
+                <button>
+                  View Load Details
+                </button>
+              </Link>
+            </li>
+          </ul>
+        </section>
       ))}
     </main>
   );

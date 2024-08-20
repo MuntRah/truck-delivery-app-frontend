@@ -37,10 +37,11 @@ const OrderDetails = (props) => {
         <h2>To: {order.to}</h2>
         <p>Vehicle type : {order.vehicle}</p>
         <p>Status : {order.orderStatus}</p>
-        <p>Price :{order.price}</p>
+        <p>Price :{order.rate}</p>
         <Link to={`/orders/${order._id}/update`}>
         <button id="update" type="update">UPDATE</button>
         </Link>
+
 
 
         {/* <CustomerDate name={order.customer.username} date={order.createdAt}/> */}
