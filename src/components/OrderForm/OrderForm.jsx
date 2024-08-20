@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { GoogleMap, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
+import { GoogleMap, DirectionsRenderer } from '@react-google-maps/api';
 
 const OrderForm = ({ handleAddOrder }) => {
   const [formData, setFormData] = useState({
@@ -10,7 +10,7 @@ const OrderForm = ({ handleAddOrder }) => {
 
   const [directions, setDirections] = useState(null);
   const [distance, setDistance] = useState('');
-  const [mapCenter, setMapCenter] = useState({ lat: 37.7749, lng: -122.4194 }); // Hada el long/lat 7ag San Francisco
+  const [mapCenter, setMapCenter] = useState({ lat: 24.7136, lng:  46.6753 }); // Hada el long/lat 7ag el Riyadh
   const [rate, setRate] = useState('');
 
   useEffect(() => {
@@ -24,8 +24,8 @@ const OrderForm = ({ handleAddOrder }) => {
         },
         (error) => {
           console.error('Error obtaining location:', error);
-          // hada default location lama el geolocation fails ewadeek ela San Fransisco
-          setMapCenter({ lat: 37.7749, lng: -122.4194 });
+          // hada default location lama el geolocation fails ewadeek ela el Riyadh
+          setMapCenter({ lat: 24.7136, lng:  46.6753 });
         }
       );
     }
@@ -44,10 +44,10 @@ const OrderForm = ({ handleAddOrder }) => {
       const match = distance.match(/[\d.]+/); 
       if (match) {
         const distanceValue = match[0]; 
-        const calculatedRate = distanceValue * 1.2;
-        setRate(calculatedRate.toFixed(3)); // esawi el rate with two decimal points
+        const calculatedRate = distanceValue * 1.2;  
+        setRate(calculatedRate.toFixed(3)); // esawi el rate with three decimal points nafs el dinar
       } else {
-        setRate(''); // Clear rate if no valid distance is found
+        setRate(''); // Clear rate eda mafee distance found
       }
     }
   }, [distance]);
