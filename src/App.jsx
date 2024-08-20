@@ -16,8 +16,7 @@ import orderService from "./services/orderService";
 import OrderList from "./components/OrderList/OrderList";
 import OrderDetails from "./components/OrderDetails/OrderDetails";
 import OrderForm from "./components/OrderForm/OrderForm";
-import UpdateOrderForm from "./components/UpdateOrderForm/UpdateOrderForm";
-
+import UpdateForm from "./components/UpdateForm/UpdateForm"
 export const AuthedUserContext = createContext(null);
 
 const App = () => {
@@ -57,19 +56,14 @@ const App = () => {
     await orderService.deleteOrder(orderId);
     const updatedOrders = await orderService.index();
     setOrders(updatedOrders);
-    navigate("order/orders");
+    navigate("/orders");
 
   };
-  
-  const handleUpdateOrder = async (orderFormData) => {
-    const updatedOrder = await orderService.updateOrder(orderFormData);
-    
-    const updatedOrders = orders.map(order =>
-      order.id === updatedOrder.id ? updatedOrder : order
-    );
-    setOrders(updatedOrders);
-    
-    navigate("/orders");
+
+  const handleUpdateOrder = async (orderId, FormData) => {
+    const updatedOrder = await orderService.update(orderId, FormData);
+    setOrders(orders.map((order) => (orderId === order._id ? updatedOrder : order)));
+    navigate(`/orders`);
   };
 
   return (
@@ -95,18 +89,10 @@ const App = () => {
                 path="/orders/new"
                 element={<OrderForm handleAddOrder={handleAddOrder} />}
               />
-              
-            <Route
-              path="/orders/update/:orderId"
-              element={
-                <UpdateOrderForm 
-                  orders={orders}
-                  setOrders={setOrders}
-                  handleUpdateOrder={handleUpdateOrder}
-                />
-              }
-            />
-
+              <Route
+                path="/orders/:orderId/update"
+                element={<UpdateForm handleUpdateOrder={handleUpdateOrder} />}
+              />
             </>
           ) : (
             <Route path="/" element={<Landing />} />  

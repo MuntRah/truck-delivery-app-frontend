@@ -1,5 +1,6 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState } from "react";
+
 
 // Services
 import orderService from "../../services/orderService";
@@ -37,8 +38,9 @@ const OrderDetails = (props) => {
         <p>Vehicle type : {order.vehicle}</p>
         <p>Status : {order.orderStatus}</p>
         <p>Price :{order.price}</p>
+        <Link to={`/orders/${order._id}/update`}>
         <button id="update" type="update">UPDATE</button>
-      
+        </Link>
 
 
         {/* <CustomerDate name={order.customer.username} date={order.createdAt}/> */}
