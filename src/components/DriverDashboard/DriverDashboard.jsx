@@ -5,9 +5,9 @@ const DriverDashboard = ({}) => {
   const user = useContext(AuthedUserContext);
   return (
     <main>
-      <h1>Welcome , {user.username}</h1>
+      <h1>Welcome, {user.username}</h1>
       <p>
-        This is the driver dashboard page where you, and only you, can see a driver dashboard
+        This is the Driver dashboard page where you, and only you, can see a dashboard
         of all of your things.
       </p>
     </main>
