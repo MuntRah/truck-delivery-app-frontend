@@ -11,6 +11,7 @@ const OrderForm = ({ handleAddOrder }) => {
   const [directions, setDirections] = useState(null);
   const [distance, setDistance] = useState('');
   const [mapCenter, setMapCenter] = useState({ lat: 37.7749, lng: -122.4194 }); // Hada el long/lat 7ag San Francisco
+  const [rate, setRate] = useState('');
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -29,6 +30,7 @@ const OrderForm = ({ handleAddOrder }) => {
       );
     }
   }, []);
+  
 
   // 3ashan esawi calculate route lama el from or to values change
   useEffect(() => {
@@ -36,6 +38,20 @@ const OrderForm = ({ handleAddOrder }) => {
       calculateRoute();
     }
   }, [formData.from, formData.to]);
+
+  useEffect(() => {
+    if (distance) {
+      const match = distance.match(/[\d.]+/); 
+      if (match) {
+        const distanceValue = match[0]; 
+        const calculatedRate = distanceValue * 1.2;
+        setRate(calculatedRate.toFixed(3)); // esawi el rate with two decimal points
+      } else {
+        setRate(''); // Clear rate if no valid distance is found
+      }
+    }
+  }, [distance]);
+  
 
   const handleChange = (evt) => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
@@ -113,7 +129,7 @@ const OrderForm = ({ handleAddOrder }) => {
         </select>
 
         <p>Estimated Distance: {distance}</p>
-        <p>Rate: (BD{})</p>
+        <p>Rate:  BD {rate}</p>
 
         <button type="submit">SUBMIT</button>
       </form>
