@@ -1,5 +1,4 @@
 const BASE_URL = `${import.meta.env.VITE_BACKEND_URL}/orders`;
-
 const index = async () => {
   try {
     const res = await fetch(`${BASE_URL}`, {
@@ -10,7 +9,6 @@ const index = async () => {
     console.log(error);
   }
 };
-
 const show = async (orderId) => {
   try {
     const res = await fetch(`${BASE_URL}/${orderId}`, {
@@ -21,21 +19,6 @@ const show = async (orderId) => {
     console.log(error);
   }
 };
-
-// Need to fix
-// const create = async (orderFormData) => {
-//   const options = {
-//     method: 'POST',
-//     headers: {
-//               Authorization: `Bearer ${localStorage.getItem('token')}`,
-//               'Content-Type': 'application/json',
-//             },
-//     body: JSON.stringify(orderFormData)
-//   }
-//   const res = await fetch(`${BASE_URL}/orders`)
-//   return res.json()
-// }
-
 const create = async (orderFormData) => {
   try {
     const res = await fetch(`${BASE_URL}`, {
@@ -64,21 +47,19 @@ const deleteOrder = async (orderId) => {
     console.log(error);
   }
 };
-
 async function update(orderId, FormData) {
   try {
     const res = await fetch(`${BASE_URL}/${orderId}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-        'Content-Type': 'application/json'
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(FormData)
+      body: JSON.stringify(FormData),
     });
     return res.json();
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-};
-
-export default { index, show, create, deleteOrder , update };
+}
+export default { index, show, create, deleteOrder, update };

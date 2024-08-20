@@ -16,7 +16,7 @@ import orderService from "./services/orderService";
 import OrderList from "./components/OrderList/OrderList";
 import OrderDetails from "./components/OrderDetails/OrderDetails";
 import OrderForm from "./components/OrderForm/OrderForm";
-import UpdateForm from "./components/UpdateForm/UpdateForm"
+import UpdateForm from "./components/UpdateForm/UpdateForm";
 export const AuthedUserContext = createContext(null);
 
 const App = () => {
@@ -56,12 +56,13 @@ const App = () => {
     const updatedOrders = await orderService.index();
     setOrders(updatedOrders);
     navigate("/orders");
-
   };
 
   const handleUpdateOrder = async (orderId, FormData) => {
     const updatedOrder = await orderService.update(orderId, FormData);
-    setOrders(orders.map((order) => (orderId === order._id ? updatedOrder : order)));
+    setOrders(
+      orders.map((order) => (orderId === order._id ? updatedOrder : order))
+    );
     navigate(`/orders`);
   };
 
