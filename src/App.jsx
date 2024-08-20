@@ -74,6 +74,8 @@ const App = () => {
           {user?(
             <>
               <Route path="/" element={<Dashboard user={user} />} />
+              {/* <Route path="/DriverDashboard" element={<DriverDashboard user={user} />} /> */}
+
               <Route
                 path="/orders"
                 element={
