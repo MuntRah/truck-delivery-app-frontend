@@ -13,8 +13,7 @@ import OrderList from "./components/OrderList/OrderList";
 import OrderDetails from "./components/OrderDetails/OrderDetails";
 import OrderForm from "./components/OrderForm/OrderForm";
 import UpdateForm from "./components/UpdateForm/UpdateForm";
-import { LoadScript } from '@react-google-maps/api';
-
+import MyLoads from "./components/MyLoads/MyLoads";
 export const AuthedUserContext = createContext(null);
 
 const App = () => {
@@ -49,8 +48,8 @@ const App = () => {
     navigate("/orders");
   };
 
-  const handleUpdateOrder = async (orderId, formData) => {
-    const updatedOrder = await orderService.update(orderId, formData);
+  const handleUpdateOrder = async (orderId, FormData) => {
+    const updatedOrder = await orderService.update(orderId, FormData);
     setOrders(
       orders.map((order) => (orderId === order._id ? updatedOrder : order))
     );
@@ -59,48 +58,50 @@ const App = () => {
 
   return (
     <>
-      <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY} loadingElement={<div>Loading...</div>}>
-        <AuthedUserContext.Provider value={user}>
-          <NavBar user={user} handleSignout={handleSignout} />
-          <Routes>
-            {user ? (
-              <>
-                <Route path="/" element={<Dashboard user={user} />} />
-                <Route
-                  path="/orders"
-                  element={
-                    <OrderList
-                      orders={orders}
-                      handleDeleteOrder={handleDeleteOrder}
-                    />
-                  }
-                />
-                <Route path="/orders/:orderId" element={<OrderDetails />} />
-                <Route
-                  path="/orders/new"
-                  element={<OrderForm handleAddOrder={handleAddOrder} />}
-                />
-                <Route
-                  path="/orders/:orderId/update"
-                  element={<UpdateForm handleUpdateOrder={handleUpdateOrder} />}
-                />
-              </>
-            ) : (
-              <Route path="/" element={<Landing />} />
-            )}
-            <Route path="/signup" element={<SignupForm setUser={setUser} />} />
-            <Route path="/signin" element={<SigninForm setUser={setUser} />} />
-            <Route
-              path="/driver-signup"
-              element={<DriverSignupForm setUser={setUser} />}
-            />
-            <Route
-              path="/driver-signin"
-              element={<DriverSigninForm setUser={setUser} />}
-            />
-          </Routes>
-        </AuthedUserContext.Provider>
-      </LoadScript>
+      <AuthedUserContext.Provider value={user}>
+        <NavBar user={user} handleSignout={handleSignout} />
+        <Routes>
+          {user ? (
+            <>
+              <Route path="/" element={<Dashboard user={user} />} />
+              <Route
+                path="/orders"
+                element={
+                  <OrderList
+                    orders={orders}
+                    handleDeleteOrder={handleDeleteOrder}
+                  />
+                }
+              />
+              <Route path="/orders/:orderId" element={<OrderDetails />} />
+
+              <Route
+                path="/orders/new"
+                element={<OrderForm handleAddOrder={handleAddOrder} />}
+              />
+              
+              <Route
+                path="/orders/:orderId/update"
+                element={<UpdateForm handleUpdateOrder={handleUpdateOrder} />}
+              />
+              
+            </>
+          ) : (
+            <Route path="/" element={<Landing />} />  
+          )}
+          <Route path="/signup" element={<SignupForm setUser={setUser} />} />
+          <Route path="/signin" element={<SigninForm setUser={setUser} />} />
+
+          <Route
+            path="/driver-signup"
+            element={<DriverSignupForm setUser={setUser} />}
+          />
+          <Route
+            path="/driver-signin"
+            element={<DriverSigninForm setUser={setUser} />}
+          />
+        </Routes>
+      </AuthedUserContext.Provider>
     </>
   );
 };
