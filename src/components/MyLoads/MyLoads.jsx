@@ -24,6 +24,7 @@ const LoadList = ({ loads }) => {
         </Link>
       ))}
     </main>
+    
   );
 };
 
