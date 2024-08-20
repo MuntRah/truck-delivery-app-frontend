@@ -39,11 +39,12 @@ const App = () => {
 
   // editing in app.jsx
 
-  // const handleAddOrder = async (orderFormData) => {
-  //   const newOrder = await orderService.create(orderFormData);
+  // const UpdateOrderForm = async (orderFormData) => {
+  //   const updateOrder = await orderService.updateOrder(orderFormData);
   //   setOrders([...orders, newOrder]);
-  //   // navigate('/order/orders');
+  //   navigate('/order/orders');
   // };
+
   const navigate = useNavigate();
   const handleAddOrder = async (orderFormData) => {
     const newOrder = await orderService.create(orderFormData);
@@ -94,7 +95,7 @@ const App = () => {
               />
             </>
           ) : (
-            <Route path="/" element={<Landing />} />
+            <Route path="/" element={<Landing />} />  
           )}
           <Route path="/signup" element={<SignupForm setUser={setUser} />} />
           <Route path="/signin" element={<SigninForm setUser={setUser} />} />
