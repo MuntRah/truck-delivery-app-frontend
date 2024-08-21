@@ -1,0 +1,49 @@
+.detailList {
+  color: rgb(86, 80, 80);
+  font-weight: 500;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: large;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 30vh;
+}
+p {
+  color: #616269;
+}
+
+#update {
+  background-color: #0c145c;
+  color: aliceblue;
+  font-weight: 500;
+}
+#update:hover {
+  background-color: #616269;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  transition: 1.5s;
+  border-color: aliceblue;
+  box-shadow: black 10px 10px;
+}
+.container {
+  align-items: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: bold;
+  font-family: "Poppins", sans-serif;
+}
+h1 {
+  font-weight: bolder;
+}
+.update {
+  color: rgb(255, 255, 255);
+  border-radius: 25px;
+}
+select {
+  border-radius: 20px;
+  background-color: black;
+  color: white;
+}

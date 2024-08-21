@@ -1,17 +1,18 @@
-import { useState, useEffect } from 'react';
-import { GoogleMap, DirectionsRenderer } from '@react-google-maps/api';
+import { useState, useEffect } from "react";
+import { GoogleMap, DirectionsRenderer } from "@react-google-maps/api";
+import "./OrderForm.css";
 
 const OrderForm = ({ handleAddOrder }) => {
   const [formData, setFormData] = useState({
-    from: '',
-    to: '',
-    vehicle: 'Sedan',
+    from: "",
+    to: "",
+    vehicle: "Sedan",
   });
 
-  const [directions, setDirections] = useState('');
-  const [distance, setDistance] = useState('');
-  const [mapCenter, setMapCenter] = useState({ lat: 24.7136, lng:  46.6753 }); // Hada el long/lat 7ag el Riyadh
-  const [rate, setRate] = useState('');
+  const [directions, setDirections] = useState(null);
+  const [distance, setDistance] = useState("");
+  const [mapCenter, setMapCenter] = useState({ lat: 24.7136, lng: 46.6753 }); // Hada el long/lat 7ag el Riyadh
+  const [rate, setRate] = useState("");
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -23,14 +24,13 @@ const OrderForm = ({ handleAddOrder }) => {
           });
         },
         (error) => {
-          console.error('Error obtaining location:', error);
+          console.error("Error obtaining location:", error);
           // hada default location lama el geolocation fails ewadeek ela el Riyadh
-          setMapCenter({ lat: 24.7136, lng:  46.6753 });
+          setMapCenter({ lat: 24.7136, lng: 46.6753 });
         }
       );
     }
   }, []);
-  
 
   // 3ashan esawi calculate route lama el from or to values change
   useEffect(() => {
@@ -42,18 +42,16 @@ const OrderForm = ({ handleAddOrder }) => {
 
   useEffect(() => {
     if (distance) {
-      const sanitizedDistance = distance.replace(/,/g, ''); //This will remove the commas from the value, we need this because the "match" below was only reading the number before the comma resulting in wrong calcultion
-      const match = sanitizedDistance.match(/[\d.]+/); 
+      const match = distance.match(/[\d.]+/);
       if (match) {
-        const distanceValue = match[0]; 
-        const calculatedRate = distanceValue * 1.2;  
+        const distanceValue = match[0];
+        const calculatedRate = distanceValue * 1.2;
         setRate(calculatedRate.toFixed(3)); // esawi el rate with three decimal points nafs el dinar
       } else {
-        setRate(''); // Clear rate eda mafee distance found
+        setRate(""); // Clear rate eda mafee distance found
       }
     }
   }, [distance]);
-  
 
   const handleChange = (evt) => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
@@ -75,10 +73,12 @@ const OrderForm = ({ handleAddOrder }) => {
         },
         (result, status) => {
           if (status === window.google.maps.DirectionsStatus.OK && result) {
-            setDirections(result); // Show directions 
+            console.log("Directions result:", result);
+            setDirections(result); // Show directions
             const distance = result.routes[0]?.legs[0]?.distance?.text;
-            setDistance(distance || 'Distance unavailable');
+            setDistance(distance || "Distance unavailable");
           } else {
+            console.error(`Error fetching directions: ${status}`);
             setDirections(null); // Hada besawi clear 7ag el directions eda 9ar fe error
           }
         }
@@ -89,7 +89,7 @@ const OrderForm = ({ handleAddOrder }) => {
   return (
     <main>
       <GoogleMap
-        mapContainerStyle={{ height: '400px', width: '100%' }}
+        mapContainerStyle={{ height: "400px", width: "100%" }}
         zoom={10}
         center={mapCenter}
       >
@@ -129,9 +129,9 @@ const OrderForm = ({ handleAddOrder }) => {
         </select>
 
         <p>Estimated Distance: {distance}</p>
-        <p>Rate:  BD {rate}</p>
+        <p>Rate: BD {rate}</p>
 
-        <button type="submit">SUBMIT</button>
+        <button className="submit" type="submit">SUBMIT</button>
       </form>
     </main>
   );

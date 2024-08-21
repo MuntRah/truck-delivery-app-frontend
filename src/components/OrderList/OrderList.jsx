@@ -1,34 +1,40 @@
 import { Link } from "react-router-dom";
-
+import "./OrderList.css";
 const OrderList = ({ orders, handleDeleteOrder }) => {
   if (!orders || orders.length === 0) {
-    return <main>There are no orders.</main>;
+    return (
+      <main>
+        <div className="NoOrderlist">
+          <h1 className="NoOrder">There are no orders.</h1>
+        </div>
+      </main>
+    );
   }
 
   return (
     <main>
       {orders.map((order) => (
-        <section key={order._id}>
-          <ul>
-            <li>
-              <h2>
-                From: ({order.from}) - To: ({order.to})
-              </h2>
-              <button
-                onClick={() => {
-                  handleDeleteOrder(order._id);
-                }}
-              >
-                Delete
-              </button>
-              <Link to={`/orders/${order._id}`}>
-                <button>
-                  View Details
+        <div className="orderList">
+          <section key={order._id}>
+            <ul>
+              <li>
+                <h2 className="from-to">
+                  From: ({order.from}) - To: ({order.to})
+                </h2>
+                <button className="deleteBtn"
+                  onClick={() => {
+                    handleDeleteOrder(order._id);
+                  }}
+                >
+                  Delete
                 </button>
-              </Link>
-            </li>
-          </ul>
-        </section>
+                <Link to={`/orders/${order._id}`}>
+                  <button className="detailsBtn">Details</button>
+                </Link>
+              </li>
+            </ul>
+          </section>
+        </div>
       ))}
     </main>
   );

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as authService from '../../services/authService';
+import 'bulma/css/bulma.min.css'; // Import Bulma CSS
 
 const DriverSigninForm = (props) => {
   const navigate = useNavigate();
@@ -32,40 +33,67 @@ const DriverSigninForm = (props) => {
   };
 
   return (
-    <main>
-      <h1>Driver Log In</h1>
-      <p>{message}</p>
-      <form autoComplete="off" onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Username:</label>
-          <input
-            type="text"
-            autoComplete="off"
-            id="username"
-            value={formData.username}
-            name="username"
-            onChange={handleChange}
-          />
+    <section className="section">
+      <div className="container">
+        <div className="columns is-centered">
+          <div className="column is-half">
+            <div className="card">
+              <header className="card-header">
+                <p className="card-header-title">
+                  <span className="icon is-small">
+                    <i className="fas fa-truck"></i> {/* Use a truck icon for drivers */}
+                  </span>
+                  <span>Driver Log In</span>
+                </p>
+              </header>
+              <div className="card-content">
+                <p className="message has-text-centered">{message}</p>
+                <form autoComplete="off" onSubmit={handleSubmit} className="form">
+                  <div className="field">
+                    <label className="label" htmlFor="username">Username:</label>
+                    <div className="control">
+                      <input
+                        type="text"
+                        autoComplete="off"
+                        id="username"
+                        value={formData.username}
+                        name="username"
+                        onChange={handleChange}
+                        className="input"
+                      />
+                    </div>
+                  </div>
+                  <div className="field">
+                    <label className="label" htmlFor="password">Password:</label>
+                    <div className="control">
+                      <input
+                        type="password"
+                        autoComplete="off"
+                        id="password"
+                        value={formData.password}
+                        name="password"
+                        onChange={handleChange}
+                        className="input"
+                      />
+                    </div>
+                  </div>
+                  <div className="field is-grouped">
+                    <div className="control">
+                      <button type="submit" className="button is-primary">Log In</button>
+                    </div>
+                    <div className="control">
+                      <Link to="/DriverDashboard">
+                        <button type="button" className="button is-light">Cancel</button>
+                      </Link>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            autoComplete="off"
-            id="password"
-            value={formData.password}
-            name="password"
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <button>Log In</button>
-          <Link to="/DriverDashboard">
-            <button>Cancel</button>
-          </Link>
-        </div>
-      </form>
-    </main>
+      </div>
+    </section>
   );
 };
 
