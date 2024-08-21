@@ -38,7 +38,7 @@ const OrderDetails = (props) => {
           <h1>To: {order.to}</h1>
           <p>Vehicle type : {order.vehicle}</p>
           <p>Status : {order.orderStatus}</p>
-          <p>Price :{order.rate}</p>
+          <p>Price :{order.price}</p>
           <Link to={`/orders/${order._id}/update`}>
             <button className="update" type="update">
               UPDATE
