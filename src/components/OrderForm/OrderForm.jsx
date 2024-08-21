@@ -8,7 +8,7 @@ const OrderForm = ({ handleAddOrder }) => {
     vehicle: 'Sedan',
   });
 
-  const [directions, setDirections] = useState(null);
+  const [directions, setDirections] = useState('');
   const [distance, setDistance] = useState('');
   const [mapCenter, setMapCenter] = useState({ lat: 24.7136, lng:  46.6753 }); // Hada el long/lat 7ag el Riyadh
   const [rate, setRate] = useState('');
@@ -34,6 +34,7 @@ const OrderForm = ({ handleAddOrder }) => {
 
   // 3ashan esawi calculate route lama el from or to values change
   useEffect(() => {
+    setRate('');
     if (formData.from && formData.to) {
       calculateRoute();
     }
@@ -41,7 +42,8 @@ const OrderForm = ({ handleAddOrder }) => {
 
   useEffect(() => {
     if (distance) {
-      const match = distance.match(/[\d.]+/); 
+      const sanitizedDistance = distance.replace(/,/g, ''); //This will remove the commas from the value, we need this because the "match" below was only reading the number before the comma resulting in wrong calcultion
+      const match = sanitizedDistance.match(/[\d.]+/); 
       if (match) {
         const distanceValue = match[0]; 
         const calculatedRate = distanceValue * 1.2;  
@@ -73,12 +75,10 @@ const OrderForm = ({ handleAddOrder }) => {
         },
         (result, status) => {
           if (status === window.google.maps.DirectionsStatus.OK && result) {
-            console.log('Directions result:', result);
             setDirections(result); // Show directions 
             const distance = result.routes[0]?.legs[0]?.distance?.text;
             setDistance(distance || 'Distance unavailable');
           } else {
-            console.error(`Error fetching directions: ${status}`); 
             setDirections(null); // Hada besawi clear 7ag el directions eda 9ar fe error
           }
         }
