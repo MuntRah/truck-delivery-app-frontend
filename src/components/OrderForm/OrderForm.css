@@ -1,0 +1,29 @@
+form {
+  font-size: large;
+  margin-top: 40px;
+}
+input {
+  font-size: large;
+  border-radius: 10px;
+  border-color: aliceblue;
+}
+label {
+  font-size: large;
+  color: black;
+  font-weight: bold;
+}
+p {
+  color: black;
+}
+button {
+  color: aliceblue;
+}
+select {
+  border-radius: 20px;
+  background-color: black;
+  color: white;
+}
+.submit {
+  color: aliceblue;
+  border-radius: 25px;
+}

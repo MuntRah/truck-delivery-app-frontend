@@ -19,8 +19,8 @@ import OrderDetails from "./components/OrderDetails/OrderDetails";
 import OrderForm from "./components/OrderForm/OrderForm";
 import UpdateForm from "./components/UpdateForm/UpdateForm";
 
-import { LoadScript } from '@react-google-maps/api';
-
+import { LoadScript } from "@react-google-maps/api";
+import "bulma/css/bulma.min.css";
 export const AuthedUserContext = createContext(null);
 
 const App = () => {
@@ -65,7 +65,10 @@ const App = () => {
 
   return (
     <>
-      <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY} loadingElement={<div>Loading...</div>}>
+      <LoadScript
+        googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
+        loadingElement={<div>Loading...</div>}
+      >
         <AuthedUserContext.Provider value={user}>
           <NavBar user={user} handleSignout={handleSignout} />
           <Routes>

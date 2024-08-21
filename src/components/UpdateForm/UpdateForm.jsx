@@ -1,16 +1,15 @@
-import { useState , useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
 import orderService from "../../services/orderService";
+import "./Update.css";
 
 const UpdateForm = ({ handleUpdateOrder }) => {
-    
-    
   const { orderId } = useParams();
 
   const [formData, setFormData] = useState({
-    pickup: '',
-    dropoff: '',
-    vehicle: 'Sedan',
+    pickup: "",
+    dropoff: "",
+    vehicle: "Sedan",
   });
 
   useEffect(() => {
@@ -21,18 +20,14 @@ const UpdateForm = ({ handleUpdateOrder }) => {
     fetchHoot();
   }, [orderId]);
 
-  
-
   const handleChange = (evt) => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
   };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-      handleUpdateOrder(orderId, formData);
-    
+    handleUpdateOrder(orderId, formData);
   };
-
 
   return (
     <main>
@@ -67,7 +62,7 @@ const UpdateForm = ({ handleUpdateOrder }) => {
           <option value="SUV">SUV</option>
           <option value="Truck">Truck</option>
         </select>
-        <button type="submit">SUBMIT</button>
+        <button className="submit"type="submit">SUBMIT</button>
       </form>
     </main>
   );
