@@ -95,8 +95,17 @@ const OrderForm = ({ handleAddOrder }) => {
       >
         {directions && <DirectionsRenderer directions={directions} />}
       </GoogleMap>
+      
+      {distance && (
+        <p>Estimated Distance: {distance}</p>
+      )}
+      {distance && (
+      <p>Rate: BD {rate}</p>
+      )}
 
-      <form onSubmit={handleSubmit}>
+      <form className="form-container" onSubmit={handleSubmit}>
+
+      <div className="form-group">
         <label htmlFor="from">Pick-up</label>
         <input
           required
@@ -106,6 +115,9 @@ const OrderForm = ({ handleAddOrder }) => {
           value={formData.from}
           onChange={handleChange}
         />
+      </div>  
+
+      <div className="form-group">
         <label htmlFor="to">Dropoff</label>
         <input
           required
@@ -115,6 +127,9 @@ const OrderForm = ({ handleAddOrder }) => {
           value={formData.to}
           onChange={handleChange}
         />
+      </div>  
+
+      <div className="form-group">
         <label htmlFor="vehicle">Vehicle type</label>
         <select
           required
@@ -127,11 +142,12 @@ const OrderForm = ({ handleAddOrder }) => {
           <option value="SUV">SUV</option>
           <option value="Truck">Truck</option>
         </select>
+      </div>
 
-        <p>Estimated Distance: {distance}</p>
-        <p>Rate: BD {rate}</p>
 
+      <div className="form-group">
         <button className="submit" type="submit">SUBMIT</button>
+      </div>
       </form>
     </main>
   );
