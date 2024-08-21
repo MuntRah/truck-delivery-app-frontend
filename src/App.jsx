@@ -4,28 +4,36 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
 import Landing from "./components/Landing/Landing";
 import Dashboard from "./components/Dashboard/Dashboard";
+import DriverDashboard from "./components/DriverDashboard/DriverDashboard";
 
 import SignupForm from "./components/SignupForm/SignupForm";
 import DriverSignupForm from "./components/SignupForm/DriverSignupForm";
 import SigninForm from "./components/SigninForm/SigninForm";
 import DriverSigninForm from "./components/SigninForm/DriverSigninForm";
 
-import * as authService from "../src/services/authService";
-
-import orderService from "./services/orderService";
 import OrderList from "./components/OrderList/OrderList";
 import OrderDetails from "./components/OrderDetails/OrderDetails";
-
 import OrderForm from "./components/OrderForm/OrderForm";
 import UpdateForm from "./components/UpdateForm/UpdateForm";
 
+import LoadList from "./components/LoadList/LoadList";
+import LoadDetails from "./components/LoadDetails/LoadDetails";
+import MyLoads from "./components/MyLoads/MyLoads";
+
+import * as authService from "../src/services/authService";
+import orderService from "./services/orderService";
+import loadService from "./services/loadService";
+
 import { LoadScript } from "@react-google-maps/api";
 import "bulma/css/bulma.min.css";
+
 export const AuthedUserContext = createContext(null);
 
 const App = () => {
   const [user, setUser] = useState(authService.getUser());
   const [orders, setOrders] = useState([]);
+  const [loads, setLoads] = useState([]);
+  const [myLoads, setMyLoads] = useState([]);
   const navigate = useNavigate();
 
   const handleSignout = () => {
@@ -42,8 +50,32 @@ const App = () => {
     if (user) fetchAllOrders();
   }, [user]);
 
-  const handleAddOrder = async (orderFormData) => {
-    const newOrder = await orderService.create(orderFormData);
+  useEffect(() => {
+    const fetchAllLoads = async () => {
+      const loadData = await loadService.index();
+      console.log("loadData:", loadData);
+      setLoads(loadData);
+    };
+    if (user?.driver) fetchAllLoads();
+  }, [user?.driver]);
+
+  useEffect(() => {
+    const fetchMyLoads = async () => {
+      const myLoadData = await loadService.myLoads();
+      console.log("myLoadData:", myLoadData);
+      setMyLoads(myLoadData);
+    };
+    if (user?.driver) fetchMyLoads();
+  }, [user?.driver]);
+
+  const handleAddOrder = async (orderFormData , rate) => {
+    console.log(orderFormData);
+    const newOrder = await orderService.create({
+      from: orderFormData.from,
+      to: orderFormData.to,
+      vehicle: orderFormData.vehicle,
+      price:rate
+    });
     setOrders([...orders, newOrder]);
     navigate("/orders");
   };
@@ -63,6 +95,21 @@ const App = () => {
     navigate(`/orders`);
   };
 
+  const handleUpdateStatus = async (orderId, formData) => {
+    const updatedOrder = await orderService.update(orderId, formData);
+    setOrders(
+      orders.map((order) => (orderId === order._id ? updatedOrder : order))
+    );
+    navigate(`/orders`);
+  };
+
+  const handleAccept = async (loadId) => {
+    const acceptedLoad = await loadService.update(loadId, { stat: "accepted" });
+    setLoads(
+      loads.map((load) => (loadId === load._id ? acceptedLoad : load))
+    );
+  };
+
   return (
     <>
       <LoadScript
@@ -74,7 +121,39 @@ const App = () => {
           <Routes>
             {user ? (
               <>
-                <Route path="/" element={<Dashboard user={user} />} />
+                {user.driver ? (
+                  <>
+                    <Route
+                      path="/"
+                      element={<DriverDashboard user={user} />}
+                    />
+                    <Route
+                      path="/loads"
+                      element={<LoadList user={user} loads={loads} />}
+                    />
+                    <Route
+                      path="/my-loads"
+                      element={
+                        <MyLoads
+                          user={user}
+                          loads={myLoads}
+                          handleUpdateStatus={handleUpdateStatus}
+                        />
+                      }
+                    />
+                    <Route
+                      path="/loads/:loadId"
+                      element={
+                        <LoadDetails user={user} handleAccept={handleAccept} />
+                      }
+                    />
+                  </>
+                ) : (
+                  <>
+                  <Route path="/" element={<Dashboard user={user} />} />
+                  
+                </>
+                )}
                 <Route
                   path="/orders"
                   element={

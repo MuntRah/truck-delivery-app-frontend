@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { GoogleMap, DirectionsRenderer } from "@react-google-maps/api";
 import "./OrderForm.css";
+import { version } from "react";
 
 const OrderForm = ({ handleAddOrder }) => {
   const [formData, setFormData] = useState({
@@ -54,11 +55,12 @@ const OrderForm = ({ handleAddOrder }) => {
 
   const handleChange = (evt) => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
+    
   };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    handleAddOrder(formData);
+    handleAddOrder(formData, fullRate);
   };
 
   const calculateRoute = () => {
@@ -84,7 +86,7 @@ const OrderForm = ({ handleAddOrder }) => {
       );
     }
   };
-
+  let fullRate;
   return (
     <main>
       <GoogleMap
@@ -128,7 +130,7 @@ const OrderForm = ({ handleAddOrder }) => {
         </select>
 
         <p>Estimated Distance: {distance}</p>
-        <p>Rate: BD {rate}</p>
+        <p>Rate: BD {fullRate=formData.vehicle=="SUV"?rate*1.5: formData.vehicle=="Truck"?rate*2:rate}</p>
 
         <button className="submit" type="submit">SUBMIT</button>
       </form>

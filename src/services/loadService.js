@@ -22,12 +22,23 @@ const show = async (loadId) => {
   }
 };
 
+const myLoads = async (loadId) => {
+  try {
+    const res = await fetch(`${BASE_URL}/my-loads/show`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 
 
 async function update(loadId, FormData) {
   try {
     const res = await fetch(`${BASE_URL}/${loadId}`, {
-      method: 'PUT',
+      method: 'POST',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
         'Content-Type': 'application/json'
@@ -40,4 +51,4 @@ async function update(loadId, FormData) {
   }
 };
 
-export default { index, show,  update };
+export default { index, show,  update , myLoads };

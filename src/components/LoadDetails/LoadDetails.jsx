@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 // Services
 import loadService from "../../services/loadService";
 
-const LoadDetails = (props) => {
-  const { loadId } = useParams();
+const LoadDetails = ({user,handleAccept}) => {
+  const {loadId}  = useParams();
   const [load, setLoad] = useState(null);
 
   useEffect(() => {
@@ -30,9 +30,9 @@ const LoadDetails = (props) => {
         <h2>From :{load.from}</h2>
         <h2>To: {load.to}</h2>
         <p>Vehicle type : {load.vehicle}</p>
-        <p>Status : {load.loadStatus}</p>
-        <p>Price :{load.price}</p>
-        <button id="update" type="update">UPDATE</button>
+        <p>Status : {load.orderStatus}</p>
+        <p>Price :{load.price*0.5}</p>
+        <button onClick={()=>handleAccept(loadId)}>Accept</button>
       
 
 
