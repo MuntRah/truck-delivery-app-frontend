@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 import loadService from "../../services/loadService";
 
-  const MyLoads = ({ loads , handleUpdateLoads }) => {
+  const MyLoads = ({ loads , handleUpdateStatus }) => {
 
   const handleSubmit = async (loadId, event) => {
     event.preventDefault();
     const status = event.target.orderStatus.value; // Get the selected status
     const updatedLoad = await loadService.update(loadId, { stat: status }); 
-    const updatedLoads = await loadService.myloads();
-    handleUpdateLoads(updatedLoads)// Update the load
+    const updatedLoads = await loadService.myLoads();
+    handleUpdateStatus(updatedLoad)// Update the load
     // Optionally update the local state or re-fetch the loads to reflect changes
   };
 
