@@ -57,6 +57,21 @@ select {
   background-color: rgb(84, 240, 84);
 }
 
+#updateSubmit{
+  color: aliceblue;
+  border-radius: 25px;
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  background-color: rgb(84, 240, 84);
+}
+#updateSubmit:hover {
+  background-color: rgb(143, 250, 143);
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  border-color: aliceblue;
+}
+
+
 #sub-button{
 display: flex;
 justify-content: center;

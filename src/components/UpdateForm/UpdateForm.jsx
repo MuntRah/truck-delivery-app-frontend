@@ -150,7 +150,7 @@ const UpdateForm = ({ handleUpdateOrder }) => {
         <p>Estimated Distance: {distance}</p>
         <p>Rate: BD {fullRate=formData.vehicle=="SUV"?rate*1.5: formData.vehicle=="Truck"?rate*2:rate}</p>
 
-        <button className="submit" type="submit">SUBMIT</button>
+        <button id="updateSubmit" className="submit" type="submit">SUBMIT</button>
       </form>
     </main>
   );

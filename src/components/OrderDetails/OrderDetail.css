@@ -9,6 +9,7 @@
   flex-direction: column;
   justify-content: center;
   margin-top: 30vh;
+  height: 80vh;
  
 }
 p {
@@ -39,7 +40,7 @@ p {
 }
 
 #detailsContainer{
-  background-color: silver;
+
 }
 
 h1 {
