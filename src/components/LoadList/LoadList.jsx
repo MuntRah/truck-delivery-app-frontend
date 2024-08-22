@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import "./loadList.css"
 const LoadList = ({ loads, }) => {
   if (!loads || loads.length === 0) {
     return <main>There are no loads.</main>;
@@ -17,7 +17,7 @@ const LoadList = ({ loads, }) => {
               </h2>
               <p>payment: {(load.price*0.5)}</p>
               <Link to={`/loads/${load._id}`}>
-                <button>
+                <button id="view">
                   view
                 </button>
               </Link>

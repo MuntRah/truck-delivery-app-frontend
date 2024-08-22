@@ -99,7 +99,7 @@ const App = () => {
 
   const handleUpdateStatus = async (orderId, formData) => {
     const updatedOrder = await orderService.update(orderId, formData);
-    const updatedOrders = await loadService.index()
+    const updatedOrders = await loadService.myLoads()
     setMyLoads(
       updatedOrders
     );

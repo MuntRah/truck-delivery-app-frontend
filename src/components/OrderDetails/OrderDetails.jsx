@@ -33,7 +33,7 @@ const OrderDetails = (props) => {
   return (
     <main>
       <section className="detailList">
-        <div className="container">
+        <div id="detailsContainer" className="container">
           <h1>From :{order.from}</h1>
           <h1>To: {order.to}</h1>
           <p>Vehicle type : {order.vehicle}</p>

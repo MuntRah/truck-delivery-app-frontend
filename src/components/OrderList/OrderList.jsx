@@ -4,7 +4,7 @@ const OrderList = ({ orders, handleDeleteOrder }) => {
   if (!orders || orders.length === 0) {
     return (
       <main>
-        <div className="NoOrderlist">
+        <div id="NoOrderlist" className="NoOrderlist">
           <h1 className="NoOrder">There are no orders.</h1>
         </div>
       </main>

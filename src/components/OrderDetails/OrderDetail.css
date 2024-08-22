@@ -9,6 +9,7 @@
   flex-direction: column;
   justify-content: center;
   margin-top: 30vh;
+ 
 }
 p {
   color: #616269;
@@ -34,7 +35,13 @@ p {
   justify-content: center;
   font-weight: bold;
   font-family: "Poppins", sans-serif;
+
 }
+
+#detailsContainer{
+  background-color: silver;
+}
+
 h1 {
   font-weight: bolder;
 }
