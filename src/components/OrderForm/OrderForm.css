@@ -1,3 +1,5 @@
+
+
 form {
   font-size: large;
   margin-top: 40px;
@@ -18,12 +20,57 @@ p {
 button {
   color: aliceblue;
 }
+
 select {
   border-radius: 20px;
-  background-color: black;
-  color: white;
+  background-color: #2e2e2e; /* Darker background for select */
+  color: white; /* White text */
+  padding: 10px;
+  border: 1px solid #444; /* Match border style with inputs */
+  width: 100%;
 }
-.submit {
+
+
+#submit {
   color: aliceblue;
   border-radius: 25px;
+  margin: 20px;
+
 }
+
+#submit:hover {
+  background-color: rgb(26, 154, 54);
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+
+.form-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; 
+  
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column; 
+  gap: 5px; 
+  align-items: center; 
+
+}
+
+@media (min-width: 600px) {
+  .form-group {
+    flex-direction: row;
+    align-items: center; 
+  }
+  
+  .form-group label {
+    margin-right: 10px; 
+  }
+}
+
+#specs {
+  font-weight: bold;
+}
+

@@ -12,9 +12,8 @@ const Dashboard = () => {
           Welcome, {user.username}
         </h1>
         <div className="box">
-          <p className="content">
-            This is the dashboard page where you, and only you, can see a
-            dashboard of all of your things.
+          <p id="para" className="content">
+            This truck delivery website allows you to easily get a rate before placing an order and track the status of all your orders in real-time. Your personalized dashboard is being designed to give you full control over your orders, ensuring a seamless experience every step of the way.
           </p>
         </div>
       </div>

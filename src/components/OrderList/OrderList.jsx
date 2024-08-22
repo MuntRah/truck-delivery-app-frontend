@@ -21,16 +21,16 @@ const OrderList = ({ orders, handleDeleteOrder }) => {
                 <h2 className="from-to">
                   From: ({order.from}) - To: ({order.to})
                 </h2>
+                <Link to={`/orders/${order._id}`}>
+                  <button className="detailsBtn">View Details</button>
+                </Link>
                 <button className="deleteBtn"
                   onClick={() => {
                     handleDeleteOrder(order._id);
                   }}
                 >
-                  Delete
+                  Cancel Order
                 </button>
-                <Link to={`/orders/${order._id}`}>
-                  <button className="detailsBtn">Details</button>
-                </Link>
               </li>
             </ul>
           </section>
