@@ -9,7 +9,6 @@ const NavBar = ({ handleSignout }) => {
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="container">
-        <div className="navbar-brand">
           <a className="navbar-item" href="/">
             {/* Your logo or title here */}
           </a>
@@ -25,7 +24,6 @@ const NavBar = ({ handleSignout }) => {
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
           </a>
-        </div>
 
         <div id="navbarBasicExample" className="navbar-menu">
           <div className="navbar-start">

@@ -7,7 +7,7 @@ const LoadList = ({ loads, }) => {
 
   return (
     <main>
-      {filterdLoads.map((load) => (
+      {loads.map((load) => (
         <section key={load._id}>
           <ul>
             <li>

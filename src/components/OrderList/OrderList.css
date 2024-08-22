@@ -20,8 +20,9 @@
   margin: 10px;
   border-radius: 8px;
   width: 100vw;
-  background-color: rgba(139, 139, 139, 0.408);
+  background-color: rgba(139, 139, 139, 0.758);
   border-radius: 50px;
+  
 }
 
 .orderList ul {
@@ -38,7 +39,7 @@
 .from-to {
   margin: 0;
   font-size: 18px;
-  color: rgb(80, 80, 80);
+  color: rgb(49, 48, 48);
 }
 
 .deleteBtn,

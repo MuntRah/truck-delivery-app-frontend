@@ -2,7 +2,24 @@
 
 form {
   font-size: large;
-  margin-top: 40px;
+ 
+}
+.submit-form{
+  width: 100vw;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  /* background-image: none; */
+  background-color: silver;
+  height: 35vh;
+
+}
+.the-stuffs{
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  background-color:silver ;
+  align-items: center;
 }
 input {
   font-size: large;
@@ -23,10 +40,10 @@ button {
 
 select {
   border-radius: 20px;
-  background-color: #2e2e2e; /* Darker background for select */
-  color: white; /* White text */
+  background-color: #2e2e2e; 
+  color: white; 
   padding: 10px;
-  border: 1px solid #444; /* Match border style with inputs */
+  border: 1px solid #444; 
   width: 100%;
 }
 
@@ -35,12 +52,21 @@ select {
   color: aliceblue;
   border-radius: 25px;
   margin: 20px;
-
+  display: flex;
+  align-items: center;
+  background-color: rgb(84, 240, 84);
 }
 
+#sub-button{
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
 #submit:hover {
-  background-color: rgb(26, 154, 54);
+  background-color: rgb(143, 250, 143);
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  border-color: aliceblue;
 }
 
 

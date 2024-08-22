@@ -90,14 +90,14 @@ const OrderForm = ({ handleAddOrder }) => {
   return (
     <main>
       <GoogleMap
-        mapContainerStyle={{ height: "400px", width: "100%" }}
+        mapContainerStyle={{ height: "350px", width: "100%" }}
         zoom={10}
         center={mapCenter}
       >
         {directions && <DirectionsRenderer directions={directions} />}
       </GoogleMap>
 
-      
+      <div className="the-stuffs">
       {distance && (
         <p id="specs">Est Distance: {distance}</p>
       )}
@@ -105,10 +105,10 @@ const OrderForm = ({ handleAddOrder }) => {
       {distance && (
         <p id="specs">Rate: BD {fullRate=formData.vehicle=="SUV"?rate*1.5: formData.vehicle=="Truck"?rate*2:rate}</p>
       )}
+</div>
 
 
-
-      <form onSubmit={handleSubmit}>
+      <form className="submit-form" onSubmit={handleSubmit}>
 
     <div className="form-container">
       <div className="form-group">

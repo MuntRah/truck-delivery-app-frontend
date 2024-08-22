@@ -9,3 +9,7 @@ h1 {
 #para {
   color: black;
 }
+html{
+background-image: url(https://www.scania.com/content/dam/group/products-and-services/trucks/18317-001.jpg.transform/Rend_1200X630/image.jpg);
+background-size: cover;
+}
