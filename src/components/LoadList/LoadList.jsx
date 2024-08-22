@@ -7,7 +7,7 @@ const LoadList = ({ loads, }) => {
 
   return (
     <main>
-      {loads.map((load) => (
+      {filterdLoads.map((load) => (
         <section key={load._id}>
           <ul>
             <li>
@@ -18,7 +18,7 @@ const LoadList = ({ loads, }) => {
               <p>payment: {(load.price*0.5)}</p>
               <Link to={`/loads/${load._id}`}>
                 <button>
-                  accept
+                  view
                 </button>
               </Link>
             </li>
