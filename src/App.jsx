@@ -88,27 +88,32 @@ const App = () => {
   };
 
   const handleUpdateOrder = async (orderId, formData) => {
-    const updatedOrder = await orderService.update(orderId, formData);
+    await orderService.update(orderId, formData);
+    const updatedOrders = await orderService.index();
     setOrders(
-      orders.map((order) => (orderId === order._id ? updatedOrder : order))
+      updatedOrders
     );
+    
     navigate(`/orders`);
   };
 
   const handleUpdateStatus = async (orderId, formData) => {
     const updatedOrder = await orderService.update(orderId, formData);
-    setOrders(
-      orders.map((order) => (orderId === order._id ? updatedOrder : order))
+    const updatedOrders = await loadService.index()
+    setMyLoads(
+      updatedOrders
     );
-    navigate(`/orders`);
+    navigate(`/my-loads`);
   };
 
   const handleAccept = async (loadId) => {
-    const acceptedLoad = await loadService.update(loadId, { stat: "accepted" });
+    await loadService.update(loadId, { stat: "accepted" });
+    const acceptedLoads = loadService.index();
     setLoads(
-      loads.map((load) => (loadId === load._id ? acceptedLoad : load))
+      acceptedLoads
     );
-  };
+    navigate("/my-loads")
+  }
 
   return (
     <>

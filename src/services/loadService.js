@@ -38,7 +38,7 @@ const myLoads = async (loadId) => {
 async function update(loadId, FormData) {
   try {
     const res = await fetch(`${BASE_URL}/${loadId}`, {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
         'Content-Type': 'application/json'

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import loadService from "../../services/loadService";
 
-const MyLoads = ({ loads }) => {
+  const MyLoads = ({ loads }) => {
 
   const handleSubmit = async (loadId, event) => {
     event.preventDefault();
@@ -11,7 +11,6 @@ const MyLoads = ({ loads }) => {
   };
 
   if (!loads.length) return <main>There are no loads</main>;
-
   return (
     <main>
       {loads.map((load) => (
