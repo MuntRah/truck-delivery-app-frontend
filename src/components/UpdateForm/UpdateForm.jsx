@@ -43,15 +43,17 @@ const UpdateForm = ({ handleUpdateOrder }) => {
     }
   }, [formData.from, formData.to]);
 
+
+  //This is to calculate the price - it is now adjusted to calculate past the coma if the value is above 1000
   useEffect(() => {
     if (distance) {
-      const match = distance.match(/[\d.]+/);
+      const match = distance.match(/[\d,]+(\.\d+)?/);
       if (match) {
-        const distanceValue = match[0];
-        const calculatedRate = distanceValue * 1.2;
-        setRate(calculatedRate.toFixed(3)); // esawi el rate with three decimal points nafs el dinar
+        const distanceValueStr = match[0].replace(/,/g, '');      
+        const calculatedRate = (distanceValueStr * 1.2).toFixed(3);
+        setRate(calculatedRate);
       } else {
-        setRate(""); // Clear rate eda mafee distance found
+        setRate("");
       }
     }
   }, [distance]);
@@ -59,11 +61,11 @@ const UpdateForm = ({ handleUpdateOrder }) => {
   const {orderId} = useParams();
 
   useEffect(() => {
-    const fetchHoot = async () => {
+    const fetchOrder = async () => {
       const formData = await orderService.show(orderId);
       setFormData(formData);
     };
-    fetchHoot();
+    fetchOrder();
   }, [orderId]);
 
 
@@ -78,7 +80,6 @@ const UpdateForm = ({ handleUpdateOrder }) => {
 
   const calculateRoute = () => {
     
-
     if (formData.from  && formData.to ) {
       const directionsService = new window.google.maps.DirectionsService();
       
@@ -115,42 +116,61 @@ const UpdateForm = ({ handleUpdateOrder }) => {
         {directions && <DirectionsRenderer directions={directions} />}
       </GoogleMap>
 
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="from">Pick-up</label>
-        <input
-          required
-          type="text"
-          name="from"
-          id="from"
-          value={formData.from}
-          onChange={handleChange}
-        />
-        <label htmlFor="to">Dropoff</label>
-        <input
-          required
-          type="text"
-          name="to"
-          id="to"
-          value={formData.to}
-          onChange={handleChange}
-        />
-        <label htmlFor="vehicle">Vehicle type</label>
-        <select
-          required
-          name="vehicle"
-          id="vehicle"
-          value={formData.vehicle}
-          onChange={handleChange}
-        >
-          <option value="Sedan">Sedan</option>
-          <option value="SUV">SUV</option>
-          <option value="Truck">Truck</option>
-        </select>
+      <div className="the-stuffs">
+        {distance && (
+          <p id="specs">Est Distance: {distance}</p>
+        )}
 
-        <p>Estimated Distance: {distance}</p>
-        <p>Rate: BD {fullRate=formData.vehicle=="SUV"?rate*1.5: formData.vehicle=="Truck"?rate*2:rate}</p>
+        {distance && (
+          <p id="specs">Rate: BD {fullRate=formData.vehicle=="SUV"?rate*1.5: formData.vehicle=="Truck"?rate*2:rate}</p>
+        )}
+      </div>
 
-        <button id="updateSubmit" className="submit" type="submit">SUBMIT</button>
+      <form className="submit-form" onSubmit={handleSubmit}>
+        <div className="form-container">
+            <div className="form-group">
+              <label htmlFor="from">Pick-up</label>
+              <input
+                required
+                type="text"
+                name="from"
+                id="from"
+                value={formData.from}
+                onChange={handleChange}
+              />
+            </div>  
+
+            <div className="form-group">
+              <label htmlFor="to">Dropoff</label>
+              <input
+                required
+                type="text"
+                name="to"
+                id="to"
+                value={formData.to}
+                onChange={handleChange}
+              />
+            </div>  
+
+            <div className="form-group">
+              <label htmlFor="vehicle">Vehicle type</label>
+              <select
+                required
+                name="vehicle"
+                id="vehicle"
+                value={formData.vehicle}
+                onChange={handleChange}
+              >
+                <option value="Sedan">Sedan</option>
+                <option value="SUV">SUV</option>
+                <option value="Truck">Truck</option>
+              </select>
+            </div>
+          </div>  
+    
+              <div id="sub-button">
+                <button class="button is-primary" type="submit">SUBMIT</button>
+              </div>
       </form>
     </main>
   );

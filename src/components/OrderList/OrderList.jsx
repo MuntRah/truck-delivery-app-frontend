@@ -13,18 +13,23 @@ const OrderList = ({ orders, handleDeleteOrder }) => {
 
   return (
     <main>
+      
       {orders.map((order) => (
+        
         <div className="orderList">
           <section key={order._id}>
             <ul>
               <li>
                 <h2 className="from-to">
-                  From: ({order.from}) - To: ({order.to})
+                  Origin: ({order.from}) - Destination: ({order.to})
                 </h2>
                 <Link to={`/orders/${order._id}`}>
-                  <button className="detailsBtn">View Details</button>
+                <div id="viewdetailsbtn">
+                  <button className="button is-info">View Details</button>
+                </div>
                 </Link>
-                <button className="deleteBtn"
+                <button class="button is-danger"
+                
                   onClick={() => {
                     handleDeleteOrder(order._id);
                   }}
@@ -37,6 +42,7 @@ const OrderList = ({ orders, handleDeleteOrder }) => {
         </div>
       ))}
     </main>
+    
   );
 };
 

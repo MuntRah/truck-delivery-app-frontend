@@ -86,3 +86,7 @@ h2 {
 #NoOrderlist{
   background-color: silver;
 }
+
+#viewdetailsbtn {
+  margin: 10px;
+}
