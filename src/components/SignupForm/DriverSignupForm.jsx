@@ -24,7 +24,7 @@ const DriverSignupForm = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const newUserResponse = await authService.signup(formData);
+      const newUserResponse = await authService.driverSignup(formData);
       props.setUser(newUserResponse.user);
       navigate("/DriverDashboard");
     } catch (err) {

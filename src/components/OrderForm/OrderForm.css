@@ -1,18 +1,25 @@
-body {
-  background-color: #121212; 
-  color: #fff; 
-  font-family: 'Arial', sans-serif;
-}
+
 
 form {
   font-size: large;
-  margin-top: 10px;
-  background-color: #1e1e1e;
-  padding: 2px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-  text-align: center; /* Center text inside the form */
+ 
+}
+.submit-form{
+  width: 100vw;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  /* background-image: none; */
+  background-color: silver;
+  height: 35vh;
 
+}
+.the-stuffs{
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  background-color:silver ;
+  align-items: center;
 }
 input {
   font-size: large;
@@ -38,50 +45,97 @@ p {
 button {
   color: aliceblue;
 }
+
 select {
   border-radius: 20px;
   background-color: #2e2e2e; 
   color: white; 
-  padding: 5px;
+  padding: 10px;
   border: 1px solid #444; 
-}
-.submit {
-  color: white; 
-  background-color: #0d6efd; 
-  border: none;
-  padding: 10px 20px;
-  font-size: large;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-  margin: 10px
-  
+  width: 100%;
 }
 
-.submit:hover {
-  background-color: #0056b3;
+
+#submit {
+  margin: 20px;
+  display: flex;
+  align-items: center;
 }
+
+#updateSubmit{
+  color: aliceblue;
+  border-radius: 25px;
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  background-color: rgb(84, 240, 84);
+}
+#updateSubmit:hover {
+  background-color: rgb(143, 250, 143);
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  border-color: aliceblue;
+}
+
+
+#sub-button{
+display: flex;
+justify-content: center;
+align-items: center;
+margin: 20px;
+margin-bottom: 30px;
+}
+
+#submit:hover {
+  background-color: rgb(143, 250, 143);
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  border-color: aliceblue;
+}
+
 
 .form-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px; 
+  gap: 10px; 
+  
 }
 
 .form-group {
   display: flex;
   flex-direction: column; 
-  
-  gap: 5px; 
+  gap: 2px; 
+  align-items: center; 
+  margin-right: 5px;
 }
 
 @media (min-width: 600px) {
   .form-group {
-    flex-direction: row; 
+    flex-direction: row;
     align-items: center; 
   }
   
   .form-group label {
-    margin-right: 10px; 
+    margin-right: px; 
+    width: 110px;
   }
+}
+
+#specs {
+  font-weight: bold;
+}
+
+#form-container{
+  align-items: center;
+}
+
+#form-container{
+  align-items: center;
+}
+
+#dropdown {
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#the-specs{
+  margin-top: 10px;
 }

@@ -23,10 +23,10 @@ const DriverSigninForm = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const user = await authService.signin(formData);
+      const user = await authService.driverSignin(formData);
       console.log(user);
       props.setUser(user);
-      navigate('/DriverDashboard');
+      navigate('/');
     } catch (err) {
       updateMessage(err.message);
     }

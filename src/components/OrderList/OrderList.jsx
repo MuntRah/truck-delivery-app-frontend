@@ -4,7 +4,7 @@ const OrderList = ({ orders, handleDeleteOrder }) => {
   if (!orders || orders.length === 0) {
     return (
       <main>
-        <div className="NoOrderlist">
+        <div id="NoOrderlist" className="NoOrderlist">
           <h1 className="NoOrder">There are no orders.</h1>
         </div>
       </main>
@@ -13,30 +13,36 @@ const OrderList = ({ orders, handleDeleteOrder }) => {
 
   return (
     <main>
+      
       {orders.map((order) => (
+        
         <div className="orderList">
           <section key={order._id}>
             <ul>
               <li>
                 <h2 className="from-to">
-                  From: ({order.from}) - To: ({order.to})
+                  Origin: ({order.from}) - Destination: ({order.to})
                 </h2>
-                <button className="deleteBtn"
+                <Link to={`/orders/${order._id}`}>
+                <div id="viewdetailsbtn">
+                  <button className="button is-info">View Details</button>
+                </div>
+                </Link>
+                <button class="button is-danger"
+                
                   onClick={() => {
                     handleDeleteOrder(order._id);
                   }}
                 >
-                  Delete
+                  Cancel Order
                 </button>
-                <Link to={`/orders/${order._id}`}>
-                  <button className="detailsBtn">Details</button>
-                </Link>
               </li>
             </ul>
           </section>
         </div>
       ))}
     </main>
+    
   );
 };
 

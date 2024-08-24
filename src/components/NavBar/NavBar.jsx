@@ -5,10 +5,10 @@ import 'bulma/css/bulma.min.css'; // Import Bulma CSS
 
 const NavBar = ({ handleSignout }) => {
   const user = useContext(AuthedUserContext);
+
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="container">
-        <div className="navbar-brand">
           <a className="navbar-item" href="/">
             {/* Your logo or title here */}
           </a>
@@ -24,17 +24,27 @@ const NavBar = ({ handleSignout }) => {
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
           </a>
-        </div>
 
         <div id="navbarBasicExample" className="navbar-menu">
-          <div className="navbar-start"> {/* Place links on the left */}
+          <div className="navbar-start">
             {user ? (
               <div className="navbar-item has-dropdown is-hoverable">
                 <a className="navbar-link">Welcome, {user.username}</a>
                 <div className="navbar-dropdown">
                   <Link to="/" className="navbar-item">Dashboard</Link>
-                  <Link to="/orders" className="navbar-item">Orders</Link>
-                  <Link to="/orders/new" className="navbar-item">NEW Order</Link>
+
+                  {user.driver ? (
+                    <>
+                      <Link to="/loads" className="navbar-item">Loads</Link>
+                      <Link to="/my-loads" className="navbar-item">My Loads</Link>
+                    </>
+                  ) : (
+                    <>
+                      <Link to="/orders" className="navbar-item">Orders</Link>
+                      <Link to="/orders/new" className="navbar-item">NEW Order</Link>
+                    </>
+                  )}
+
                   <hr className="navbar-divider" />
                   <Link to="" onClick={handleSignout} className="navbar-item">
                     Sign Out

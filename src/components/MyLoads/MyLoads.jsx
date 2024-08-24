@@ -1,41 +1,35 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import loadService from "../../services/loadService";
 
-const MyLoads = ({ loads }) => {
-  const [selectedActions, setSelectedActions] = useState({});
+  const MyLoads = ({ loads , handleUpdateStatus }) => {
 
-  const handleChange = (loadId, event) => {
-    setSelectedActions({ ...selectedActions, [loadId]: event.target.value });
-  };
-
-  const handleSubmit = (loadId, event) => {
+  const handleSubmit = async (loadId, event) => {
     event.preventDefault();
-    console.log(`Load ID: ${loadId}, Action: ${selectedActions[loadId]}`);
-   
+    const status = event.target.orderStatus.value; // Get the selected status
+    const updatedLoad = await loadService.update(loadId, { stat: status }); 
+    const updatedLoads = await loadService.myLoads();
+    handleUpdateStatus(updatedLoad)// Update the load
+    // Optionally update the local state or re-fetch the loads to reflect changes
   };
 
   if (!loads.length) return <main>There are no loads</main>;
-
   return (
     <main>
       {loads.map((load) => (
         <div key={load._id}>
-          <Link to={`/orders/${load._id}`}>
+          <Link to={`/loads/${load._id}`}>
             <h2>{load.from}</h2>
             <h2>{load.to}</h2>
-            <h2>{load.price}</h2>
-            <h2>{load.status}</h2>
+            <h2>{load.price*0.5}</h2>
+            <h2>{load.orderStatus}</h2>
           </Link>
           <form onSubmit={(event) => handleSubmit(load._id, event)}>
-            <label htmlFor={`action-${load._id}`}>Action</label>
+            <label htmlFor={`orderStatus`}>Status</label>
             <select
-              name="Action"
-              id={`action-${load._id}`}
-              value={selectedActions[load._id]}
-              onChange={(event) => handleChange(load._id, event)}
-            >
-              <option value="accept">Accept</option>
-              <option value="reject">Reject</option>
+              name="orderStatus"
+              id={`orderStatus`}>
+              <option value="on the way">On the Way</option>
+              <option value="delivered">Delivered</option>
             </select>
             <button type="submit">Submit</button>
           </form>
@@ -46,6 +40,3 @@ const MyLoads = ({ loads }) => {
 };
 
 export default MyLoads;
-
-
-

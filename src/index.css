@@ -16,6 +16,6 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 html {
-  background-color: #121212; 
+  background-color: rgb(177, 202, 216);
   color: black;
 }
