@@ -25,14 +25,22 @@ input {
   font-size: large;
   border-radius: 10px;
   border-color: aliceblue;
+  background-color: #2e2e2e;
+  color: white;
+  margin-bottom: 5px;
 }
 label {
-  font-size: large;
-  color: black;
+  font-size: medium;
+  color: #fff;
   font-weight: bold;
+  margin-right: 5px;
+  margin-left: 15px;
+
 }
 p {
-  color: black;
+  color: white;
+  margin-top: 5px;
+  ;
 }
 button {
   color: aliceblue;

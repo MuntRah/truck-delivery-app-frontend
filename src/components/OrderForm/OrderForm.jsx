@@ -35,6 +35,7 @@ const OrderForm = ({ handleAddOrder }) => {
 
   // 3ashan esawi calculate route lama el from or to values change
   useEffect(() => {
+    setRate('');
     if (formData.from && formData.to) {
       calculateRoute();
     }
